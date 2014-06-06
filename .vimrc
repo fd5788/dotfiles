@@ -32,24 +32,26 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+let g:vundle_default_git_proto = 'git'
+
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'fholgado/minibufexpl.vim'
+Plugin 'gmarik/Vundle.vim',{'name': 'Vundle'}
+Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
+Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
-Plugin 'edkolev/tmuxline.vim'
+Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline.vim'}
 "Plugin 'wesleyche/SrcExpl'
 "Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'suan/vim-instant-markdown'
-"Plugin 'greyblake/vim-preview'
+Plugin 'greyblake/vim-preview'
 "Plugin 'majutsushi/tagbar'
 "Plugin 'ervandew/supertab'
 "Plugin 'marchtea/mdtogh'
