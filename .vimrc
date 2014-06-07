@@ -27,7 +27,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 "set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -35,7 +35,7 @@ call vundle#begin()
 let g:vundle_default_git_proto = 'git'
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim',{'name': 'Vundle'}
+Plugin 'gmarik/Vundle.vim',{'name': 'vundle'}
 Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
 Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
 Plugin 'SirVer/ultisnips'
@@ -52,6 +52,8 @@ Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline.vim'}
 "Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'greyblake/vim-preview'
+Plugin 'tomasr/molokai'
+"Plugin 'altercation/vim-colors-solarized'
 "Plugin 'majutsushi/tagbar'
 "Plugin 'ervandew/supertab'
 "Plugin 'marchtea/mdtogh'
@@ -325,8 +327,9 @@ if !exists("g:vimrc_loaded")
         set cursorline
         "set cursorcolumn
     else
-        colorscheme default
-        "colorscheme torte
+        "colorscheme default
+        colorscheme molokai
+        "let g:molokai_original = 1
     endif " has
 endif " exists(...)
 
@@ -484,6 +487,7 @@ set novb t_vb=
   let g:airline_theme = 'powerlineish'
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#show_buffers = 1
@@ -816,7 +820,7 @@ map <leader>s? z=
    set tags+=~/.ctags/tags/glibc.tags
    set tags+=~/.ctags/tags/stdcpp.tags
    " build tags of your own project with Ctrl-F12
-   map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+   map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>:set tags+=./tags<CR>
    " OmniCppComplete
    let OmniCpp_NamespaceSearch = 1
    let OmniCpp_GlobalScopeSearch = 1
@@ -1062,6 +1066,28 @@ map <leader>s? z=
    nmap <C-W><C-B> :BottomExplorerWindow<CR>
    nmap <silent> <leader>wm :WMToggle<CR>
    autocmd BufWinEnter \[Buf\ List\] setl nonumber
+
+"   """""""""""""""""""""""""""""""""""
+"   " winmanager setting for NERDTree
+"   """""""""""""""""""""""""""""""""""
+"   " NERD_Tree集成到WinManager
+"   let g:NERDTree_title="[NERDTree]" 
+"   function! NERDTree_Start()
+"       exec 'NERDTree'
+"   endfunction
+" 
+"   function! NERDTree_IsValid()
+"       return 1
+"   endfunction
+" 
+"   " 防止因winmanager和nerdtree冲突而导致空白页的语句
+"   nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
+"   " 设置winmanager的宽度，默认为25
+"   let g:winManagerWidth=30 
+"   " 窗口布局
+"   let g:winManagerWindowLayout='NERDTree|TagList'
+"   " 如果所有编辑文件都关闭了，退出vim
+"   let g:persistentBehaviour=0
 
    """"""""""""""""""""""""""""""
    " ctrlp setting
