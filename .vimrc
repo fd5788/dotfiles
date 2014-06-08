@@ -48,10 +48,11 @@ Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline.vim'}
+Plugin 'sjl/gundo.vim',{'name': 'gundo'}
 "Plugin 'wesleyche/SrcExpl'
 "Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'greyblake/vim-preview'
+"Plugin 'greyblake/vim-preview'
 Plugin 'tomasr/molokai'
 "Plugin 'altercation/vim-colors-solarized'
 "Plugin 'majutsushi/tagbar'
@@ -75,7 +76,7 @@ filetype plugin indent on    " required
 " :PluginSearch(!) foo - search (or refresh cache first) for foo
 " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
 "
-" see :h vundle for more details or wiki for FAQ
+"_ see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -321,7 +322,6 @@ if !exists("g:vimrc_loaded")
         \set guioptions+=r <Bar>
     \endif<CR>
 
-        "colorscheme darkblue
         colorscheme desert
         "hi normal guibg=#294d4a
         set cursorline
@@ -329,7 +329,6 @@ if !exists("g:vimrc_loaded")
     else
         "colorscheme default
         colorscheme molokai
-        "let g:molokai_original = 1
     endif " has
 endif " exists(...)
 
@@ -1036,14 +1035,17 @@ map <leader>s? z=
    " vim-instant-markdown setting
    """"""""""""""""""""""""""""""
    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-   """"""""""""""""""""""""""""""
-   " vim-instant-markdown setting
-   """"""""""""""""""""""""""""""
    let g:instant_markdown_slow = 2
    let g:instant_markdown_autostart = 0
    map <leader>mp :InstantMarkdownPreview<CR>
+
    """"""""""""""""""""""""""""""
+   " gundo setting
+   """"""""""""""""""""""""""""""
+   nnoremap <F8> :GundoToggle<CR>
+   nmap <leader>gu :GundoToggle<CR>
+
+     """"""""""""""""""""""""""""""
    " echofunc setting
    """"""""""""""""""""""""""""""
    let g:EchoFuncShowOnStatus = 1
