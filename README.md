@@ -1,7 +1,7 @@
 #dotfiles
 
 ##Plugins
-- [test](#label)
+- [test](#test)
 - [Vundle](https://github.com/gmarik/Vundle.vim)
 - [ctrlp](https://github.com/kien/ctrlp.vim)
 - [ultisnips](https://github.com/SirVer/ultisnips)
@@ -14,4 +14,4 @@
 - [supertab](https://github.com/ervandew/supertab)
 - [vim-instant-markdown](https://github.com/vim-instant-markdown)
 
-### label
+### test
