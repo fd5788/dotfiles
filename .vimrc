@@ -43,22 +43,24 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
-Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline.vim'}
+Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
 Plugin 'sjl/gundo.vim',{'name': 'gundo'}
-"Plugin 'wesleyche/SrcExpl'
+Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 "Plugin 'greyblake/vim-preview'
 Plugin 'godlygeek/tabular'
+""colorscheme
 Plugin 'tomasr/molokai'
+Plugin 'majutsushi/tagbar'
+"Plugin 'ervandew/supertab'
 "Plugin 'flazz/vim-colorschemes'
 "Plugin 'altercation/vim-colors-solarized'
-Plugin 'majutsushi/tagbar'
-Plugin 'ervandew/supertab'
-Plugin 'marchtea/mdtogh'
+"Plugin 'marchtea/mdtogh'
 "Plugin 'davidhalter/jedi'
 "Plugin 'Lokaltog/powerline'
 "Plugin 'Lokaltog/powerline-fonts'
@@ -1046,10 +1048,40 @@ map <leader>s? z=
    nnoremap <F8> :GundoToggle<CR>
    nmap <leader>gu :GundoToggle<CR>
 
-     """"""""""""""""""""""""""""""
+   """"""""""""""""""""""""""""""
    " echofunc setting
    """"""""""""""""""""""""""""""
    let g:EchoFuncShowOnStatus = 1
+
+   """"""""""""""""""""""""""""""
+   " quickfix setting
+   """"""""""""""""""""""""""""""
+   nmap <leader>cn :cn<CR>
+   nmap <leader>cp :cp<CR>
+   nmap <leader>cw :cw 10<CR>
+   "nmap <leader>cc :botright lw 10<CR>
+   "map <c-u> <c-l><c-j>:q<CR>:botright cw 10<CR>
+
+   "Automatically open the quickfix window on :make
+   " Automatically open, but do not go to (if there are errors) the quickfix /
+   " " location list window, or close it when is has become empty.
+   " "
+   " " Note: Must allow nesting of autocmds to enable any customizations for
+   " quickfix
+   " " buffers.
+   " " Note: Normally, :cwindow jumps to the quickfix window if the command
+   " opens it
+   " " (but not if it's already open). However, as part of the autocmd, this
+   " doesn't
+   " " seem to happen.
+   autocmd QuickFixCmdPost [^l]* nested cwindow
+   autocmd QuickFixCmdPost    l* nested lwindow
+
+   "Automatically fitting a quickfix window height
+   au FileType qf call AdjustWindowHeight(3, 10)
+   function! AdjustWindowHeight(minheight, maxheight)
+       exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
+   endfunction
 
    """"""""""""""""""""""""""""""""""
    " a setting
@@ -1074,24 +1106,15 @@ map <leader>s? z=
 "   " winmanager setting for NERDTree
 "   """""""""""""""""""""""""""""""""""
 "   " NERD_Tree集成到WinManager
-"   let g:NERDTree_title="[NERDTree]" 
+"   let g:NERDTree_title="[NERDTree]"
 "   function! NERDTree_Start()
 "       exec 'NERDTree'
 "   endfunction
-" 
+"
 "   function! NERDTree_IsValid()
 "       return 1
 "   endfunction
-" 
-"   " 防止因winmanager和nerdtree冲突而导致空白页的语句
-"   nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
-"   " 设置winmanager的宽度，默认为25
-"   let g:winManagerWidth=30 
-"   " 窗口布局
-"   let g:winManagerWindowLayout='NERDTree|TagList'
-"   " 如果所有编辑文件都关闭了，退出vim
-"   let g:persistentBehaviour=0
-
+"
    """"""""""""""""""""""""""""""
    " ctrlp setting
    """"""""""""""""""""""""""""""
@@ -1118,41 +1141,41 @@ map <leader>s? z=
    nmap <silent> <leader>nt :NERDTreeToggle<CR>
    let NERDTreeWinSize = 23
 
-"   """"""""""""""""""""""""""""""
-"   " SrcExpl setting
-"   """"""""""""""""""""""""""""""
-"   nmap <F8> :SrcExplToggle<CR>
-"   map <leader>se :SrcExplToggle<CR>
-"   " // Set the height of Source Explorer window
-"   let g:SrcExpl_winHeight = 8
-"   " // Set 100 ms for refreshing the Source Explorer
-"   let g:SrcExpl_refreshTime = 5000
-"   " // Set "Enter" key to jump into the exact definition context
-"   let g:SrcExpl_jumpKey = "<ENTER>"
-"   " // Set "Space" key for back from the definition context
-"   let g:SrcExpl_gobackKey = "<SPACE>"
-"   " // In order to avoid conflicts, the Source Explorer should know what plugins
-"   " // except itself are using buffers. And you need add their buffer names into
-"   " // below listaccording to the command ":buffers!"
-"   let g:SrcExpl_pluginList = [
-"           \ "__Tag_List__",
-"           \ "_NERD_tree_"
-"       \ ]
-"   " // Enable/Disable the local definition searching, and note that this is not
-"   " // guaranteed to work, the Source Explorer doesn't check the syntax for now.
-"   " // It only searches for a match with the keyword according to command 'gd'
-"   let g:SrcExpl_searchLocalDef = 1
-"   " // Do not let the Source Explorer update the tags file when opening
-"   let g:SrcExpl_isUpdateTags = 0
-"   " // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
-"   " // create/update the tags file
-"   let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
-"   " // Set "<F12>" key for updating the tags file artificially
-"   let g:SrcExpl_updateTagsKey = "<F12>"
-"   " // Set "<F3>" key for displaying the previous definition in the jump list
-"   let g:SrcExpl_prevDefKey = "<F3>"
-"   " // Set "<F4>" key for displaying the next definition in the jump list
-"   let g:SrcExpl_nextDefKey = "<F4>"
+   """"""""""""""""""""""""""""""
+   " SrcExpl setting
+   """"""""""""""""""""""""""""""
+   nmap <F8> :SrcExplToggle<CR>
+   map <leader>se :SrcExplToggle<CR>
+   " // Set the height of Source Explorer window
+   let g:SrcExpl_winHeight = 8
+   " // Set 100 ms for refreshing the Source Explorer
+   let g:SrcExpl_refreshTime = 5000
+   " // Set "Enter" key to jump into the exact definition context
+   let g:SrcExpl_jumpKey = "<ENTER>"
+   " // Set "Space" key for back from the definition context
+   let g:SrcExpl_gobackKey = "<SPACE>"
+   " // In order to avoid conflicts, the Source Explorer should know what plugins
+   " // except itself are using buffers. And you need add their buffer names into
+   " // below listaccording to the command ":buffers!"
+   let g:SrcExpl_pluginList = [
+           \ "__Tag_List__",
+           \ "_NERD_tree_"
+       \ ]
+   " // Enable/Disable the local definition searching, and note that this is not
+   " // guaranteed to work, the Source Explorer doesn't check the syntax for now.
+   " // It only searches for a match with the keyword according to command 'gd'
+   let g:SrcExpl_searchLocalDef = 1
+   " // Do not let the Source Explorer update the tags file when opening
+   let g:SrcExpl_isUpdateTags = 0
+   " // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
+   " // create/update the tags file
+   let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+   " // Set "<F12>" key for updating the tags file artificially
+   let g:SrcExpl_updateTagsKey = "<F12>"
+   " // Set "<F3>" key for displaying the previous definition in the jump list
+   let g:SrcExpl_prevDefKey = "<F3>"
+   " // Set "<F4>" key for displaying the next definition in the jump list
+   let g:SrcExpl_nextDefKey = "<F4>"
 
    """"""""""""""""""""""""""""""
    " lookupfile setting
@@ -1244,7 +1267,7 @@ map <leader>s? z=
    nmap <silent> <Leader>of :FSHere<CR>
 
    """"""""""""""""""""""""""""""
-   " Tagbar setting
+   " tagbar setting
    """"""""""""""""""""""""""""""
    let g:tagbar_width = 20
    let g:tagbar_expand = 1
@@ -1287,19 +1310,13 @@ map <leader>s? z=
    """"""""""""""""""""""""""""""
    " C/C++
    """""""""""""""""""""""""""""""
-   autocmd FileType c,cpp,xml  map <buffer> <leader><space> :make<CR>
+   autocmd FileType c,cpp,xml  map <buffer> <leader><space> :wa<CR>:make<CR>
    autocmd FileType c,cpp  setl foldmethod=syntax | setl fen
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-   "Quickfix
-   nmap <leader>cn :cn<CR>
-   nmap <leader>cp :cp<CR>
-   nmap <leader>cw :cw 10<CR>
-   "nmap <leader>cc :botright lw 10<CR>
-   "map <c-u> <c-l><c-j>:q<CR>:botright cw 10<CR>
-
+   
    function! s:GetVisualSelection()
        let save_a = @a
        silent normal! gv"ay
