@@ -1059,7 +1059,7 @@ map <leader>s? z=
    nmap <leader>cn :cn<CR>
    nmap <leader>cp :cp<CR>
    nmap <leader>cw :cw 10<CR>
-   "nmap <leader>cc :botright lw 10<CR>
+   nmap <leader>cc :botright lw 10<CR>
    "map <c-u> <c-l><c-j>:q<CR>:botright cw 10<CR>
 
    "Automatically open the quickfix window on :make
