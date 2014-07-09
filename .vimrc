@@ -12,9 +12,9 @@
 
 " Linux Distribution
 function! LinuxDis()
-  let linuxDistribution = system('cat /etc/issue | grep Arch')
-  if linuxDistribution =~ "Arch"
-    return "Arch"
+  let linuxDistribution = system('cat /etc/issue | grep Debian')
+  if linuxDistribution =~ "Debian"
+    return "Debian"
   else
     return "Fedora"
   endif
@@ -41,7 +41,9 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
+if has('lua')
+  Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
+endif
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'bling/vim-airline'
@@ -57,7 +59,7 @@ Plugin 'godlygeek/tabular'
 ""colorscheme
 Plugin 'tomasr/molokai'
 Plugin 'majutsushi/tagbar'
-"Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 "Plugin 'flazz/vim-colorschemes'
 "Plugin 'altercation/vim-colors-solarized'
 "Plugin 'marchtea/mdtogh'
@@ -66,6 +68,7 @@ Plugin 'majutsushi/tagbar'
 "Plugin 'Lokaltog/powerline-fonts'
 "Plugin 'Rip-Rip/clang_complete'
 "Plugin 'jlanzarotta/bufexplorer'
+Plugin 'mbbill/code_complete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -902,7 +905,7 @@ map <leader>s? z=
    " Plugin key-mappings.
    inoremap <expr><C-g>     neocomplete#undo_completion()
    inoremap <expr><C-l>     neocomplete#complete_common_string()
-
+if has('lua')
    " Recommended key-mappings.
    " <CR>: close popup and save indent.
    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -911,6 +914,7 @@ map <leader>s? z=
      " For no inserting <CR> key.
      "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
    endfunction
+endif
    " <Tab>: completion.
    inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
    " <C-h>, <BS>: close popup and delete backword char.
@@ -957,7 +961,7 @@ map <leader>s? z=
 
    " For perlomni.vim setting.
    " https://github.com/c9s/perlomni.vim
-   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+   " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
    """"""""""""""""""""""""""""""
    " yankring setting
