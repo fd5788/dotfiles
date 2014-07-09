@@ -69,7 +69,7 @@ Plugin 'ervandew/supertab'
 "Plugin 'Lokaltog/powerline-fonts'
 "Plugin 'Rip-Rip/clang_complete'
 "Plugin 'jlanzarotta/bufexplorer'
-Plugin 'mbbill/code_complete'
+"Plugin 'mbbill/code_complete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
