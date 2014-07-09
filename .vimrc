@@ -49,9 +49,10 @@ Plugin 'tpope/vim-repeat'
 Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
-Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
+"Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
+"Plugin 'mbbill/undotree'
 Plugin 'sjl/gundo.vim',{'name': 'gundo'}
-Plugin 'wesleyche/SrcExpl'
+"Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
 "Plugin 'suan/vim-instant-markdown'
 "Plugin 'greyblake/vim-preview'
