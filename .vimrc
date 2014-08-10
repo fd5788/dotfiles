@@ -12,12 +12,12 @@
 
 " Linux Distribution
 function! LinuxDis()
-  let linuxDistribution = system('cat /etc/issue | grep Debian')
-  if linuxDistribution =~ "Debian"
-    return "Debian"
-  else
-    return "Fedora"
-  endif
+    let linuxDistribution = system('cat /etc/issue | grep Debian')
+    if linuxDistribution =~ "Debian"
+        return "Debian"
+    else
+        return "Fedora"
+    endif
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -36,33 +36,29 @@ let g:vundle_default_git_proto = 'git'
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim',{'name': 'vundle'}
 Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'vim-scripts/AutoClose'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
-if has('lua')
-  Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
-endif
+Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
-"Plugin 'mbbill/undotree'
-Plugin 'sjl/gundo.vim',{'name': 'gundo'}
+Plugin 'mbbill/undotree'
+"Plugin 'sjl/gundo.vim',{'name': 'gundo'}
 "Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
 "Plugin 'suan/vim-instant-markdown'
 "Plugin 'greyblake/vim-preview'
 Plugin 'godlygeek/tabular'
-""colorscheme
-Plugin 'tomasr/molokai'
 Plugin 'majutsushi/tagbar'
 Plugin 'ervandew/supertab'
-"Plugin 'flazz/vim-colorschemes'
-"Plugin 'altercation/vim-colors-solarized'
 "Plugin 'marchtea/mdtogh'
 "Plugin 'davidhalter/jedi'
 "Plugin 'Lokaltog/powerline'
@@ -70,6 +66,17 @@ Plugin 'ervandew/supertab'
 "Plugin 'Rip-Rip/clang_complete'
 "Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'mbbill/code_complete'
+"Plugin 'oplatek/Conque-Shell'
+Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
+
+""colorscheme
+Plugin 'tomasr/molokai'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'altercation/vim-colors-solarized'
+
+""vim-scripts repo
+"Plugin 'Align'
+"Plugin 'AutoAlign'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,7 +101,7 @@ filetype plugin indent on    " required
 " reload them.
 filetype off
 filetype plugin indent off
-if LinuxDis() == 'Arch'
+if LinuxDis() == 'Debian'
   set rtp+=/usr/shar/go/misc/vim
 else
   set rtp+=$GOROOT/misc/vim ""Fedora
@@ -134,7 +141,7 @@ set history=400
 " multi-encoding setting
 if has("multi_byte")
   "set bomb
-  set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
+  set fileencodings=utf-8,ucs-bom,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
   " CJK environment detection and corresponding setting
   if v:lang =~ "^zh_CN"
     " Use cp936 to support GBK, euc-cn == gb2312
@@ -162,7 +169,8 @@ if has("multi_byte")
   if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
     set encoding=utf-8
     set termencoding=utf-8
-    set fileencodings=utf-8,latin1
+    ""set fileencodings=utf-8,chinese,gb18030,cp936,big5
+    set fileencodings=utf-8
   endif
 endif
 "if Platform() == "windows"
@@ -180,7 +188,7 @@ endif
 set autoread
 
 "Have the mouse enabled all the time:
-"set mouse=a
+set mouse=a
 "set mousemodel=popup
 
 "Set mapleader
@@ -436,6 +444,8 @@ set novb t_vb=
 
 "How many tenths of a second to blink
 "set mat=2
+
+set showcmd
 
 """"""""""""""""""""""""""""""
 " Statusline
@@ -751,9 +761,125 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" filetype configuration by dictionary
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
+"au FileType css setlocal dict+=~/.vim/dict/css.dict
+"au FileType c setlocal dict+=~/.vim/dict/c.dict
+"au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
+"au FileType scale setlocal dict+=~/.vim/dict/scale.dict
+"au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
+"au FileType html setlocal dict+=~/.vim/dict/javascript.dict
+"au FileType html setlocal dict+=~/.vim/dict/css.dict
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin configuration
+" new file configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"for c/shell/java file，insert file descriptions automatic
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()"
+
+func SetTitle()
+    if &filetype == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "")
+    elseif &filetype == 'python'
+        call setline(1,"#!/usr/bin/env python")
+        call append(line("."),"# coding=utf-8")
+        call append(line(".")+1, "")
+    elseif &filetype == 'markdown'
+        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."), " > File Name: ".expand("%"))
+        call append(line(".")+1, " > Author: ")
+        call append(line(".")+2, " > Mail: ")
+        call append(line(".")+3, " > Created Time: ".strftime("%c"))
+        call append(line(".")+4, " ************************************************************************/")
+        call append(line(".")+5, "")
+    endif
+    if &filetype == 'cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype == 'c'
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "")
+      endif
+    if &filetype == 'java'
+        call append(line(".")+6,"public class ".strpart(expand("%d"),0,strlen(expand("%"))-5))
+        call append(line(".")+7,"")
+    endif
+endfunc
+autocmd BufNewFile * normal G
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" compile configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-F9> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!time java %<"
+    elseif &filetype == 'sh'
+        :!time bash %
+    elseif &filetype == 'python'
+        exec "!time python2.7 %"
+    elseif &filetype == 'html'
+        exec "!firefox % &"
+    elseif &filetype == 'go'
+        " exec "!go build %<"
+        exec "!time go run %"
+    elseif &filetype == 'mkd'
+        exec "!~/.vim/markdown.pl % > %.html &"
+        exec "!firefox %.html &"
+  endif
+endfunc
+
+"C/C++ debuge
+map <C-F8> :call Rungdb()<CR>
+func! Rungdb()
+    exec "w"
+    exec "!g++ % -g -o %<"
+    exec "!gdb ./%<"
+endfunc
+
+"code style optimization
+map <F6> :call FormartSrc()<CR><CR>
+func FormartSrc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!astyle --style=ansi -a --suffix=none %"
+    elseif &filetype == 'cpp' || &filetype == 'hpp'
+        exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
+    elseif &filetype == 'perl'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif &filetype == 'py'||&filetype == 'python'
+        exec "r !autopep8 -i --aggressive %"
+    elseif &filetype == 'java'
+        exec "!astyle --style=java --suffix=none %"
+    elseif &filetype == 'jsp'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif &filetype == 'xml'
+        exec "!astyle --style=gnu --suffix=none %"
+    else
+        exec "normal gg=G"
+        return
+    endif
+    exec "e! %"
+endfunc
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -782,13 +908,13 @@ map <leader>s? z=
              \endif
    endif
 
-"   " Enable omni completion.
-"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+   " Enable omni completion.
+   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 
    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -823,8 +949,8 @@ map <leader>s? z=
    " OmniCppComplete setting
    """"""""""""""""""""""""""""""
    " additional tags
-   set tags+=~/.ctags/tags/glibc.tags
-   set tags+=~/.ctags/tags/stdcpp.tags
+   set tags+=~/.vim/tags/cpp_src/glibc.tags
+   set tags+=~/.vim/tags/cpp_src/stdcpp.tags
    " build tags of your own project with Ctrl-F12
    map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>:set tags+=./tags<CR>
    " OmniCppComplete
@@ -856,7 +982,7 @@ map <leader>s? z=
    let g:SuperTabRetainCompletionType=2
    let g:SuperTabPluginLoaded=1 " Avoid load SuperTab Plugin
    let g:SuperTabDefaultCompletionType='context'
-   let g:SuperTabContextDefaultCompletionType='<c-p>'
+   let g:SuperTabContextDefaultCompletionType='<c-x><c-u>'
    let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
    let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
    let g:SuperTabContextDiscoverDiscovery =
@@ -890,6 +1016,8 @@ map <leader>s? z=
    let g:neocomplete#sources#syntax#min_keyword_length = 3
    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+"   let g:neocomplete#auto_completion_start_length = 4
+
    " Define dictionary.
    let g:neocomplete#sources#dictionary#dictionaries = {
        \ 'default' : '',
@@ -906,7 +1034,6 @@ map <leader>s? z=
    " Plugin key-mappings.
    inoremap <expr><C-g>     neocomplete#undo_completion()
    inoremap <expr><C-l>     neocomplete#complete_common_string()
-if has('lua')
    " Recommended key-mappings.
    " <CR>: close popup and save indent.
    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -915,7 +1042,6 @@ if has('lua')
      " For no inserting <CR> key.
      "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
    endfunction
-endif
    " <Tab>: completion.
    inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
    " <C-h>, <BS>: close popup and delete backword char.
@@ -945,12 +1071,12 @@ endif
    "let g:neocomplete#disable_auto_complete = 1
    "inoremap <expr><Tab>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-   "" Enable omni completion.
-   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"   "" Enable omni completion.
+"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
    " Enable heavy omni completion.
    if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -1048,12 +1174,6 @@ endif
    map <leader>mp :InstantMarkdownPreview<CR>
 
    """"""""""""""""""""""""""""""
-   " gundo setting
-   """"""""""""""""""""""""""""""
-   nnoremap <F8> :GundoToggle<CR>
-   nmap <leader>gu :GundoToggle<CR>
-
-   """"""""""""""""""""""""""""""
    " echofunc setting
    """"""""""""""""""""""""""""""
    let g:EchoFuncShowOnStatus = 1
@@ -1139,6 +1259,16 @@ endif
         \ },
      \ 'fallback': 'find %s -type f'
      \ }
+
+   """"""""""""""""""""""""""""""
+   " ctrlp setting
+   """"""""""""""""""""""""""""""
+   let g:ctrlp_extensions = ['funky']
+   nnoremap <Leader>fu :CtrlPFunky<Cr>
+   " narrow the list down with a word under cursor
+   nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+   "SYNTAX HIGHLIGHTING (experimental)
+   let g:ctrlp_funky_syntax_highlight = 1
 
    """"""""""""""""""""""""""""""
    " NERDTree setting
@@ -1279,6 +1409,7 @@ endif
    "let g:tagbar_left = 1
    nmap <silent> <Leader>tb :TagbarToggle<CR>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype generic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1321,7 +1452,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-   
+
    function! s:GetVisualSelection()
        let save_a = @a
        silent normal! gv"ay
@@ -1377,6 +1508,8 @@ endif
     exe ":bd"
    endfunction
 
+   "delete blank line
+   nmap <silent> <Leader>dbl :g/^\s*$/d<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mark as loaded
