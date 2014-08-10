@@ -51,6 +51,7 @@ Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
 Plugin 'mbbill/undotree'
+Plugin 'mbbill/fencview'
 "Plugin 'sjl/gundo.vim',{'name': 'gundo'}
 "Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
@@ -80,7 +81,8 @@ Plugin 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+"filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -99,14 +101,14 @@ filetype plugin indent on    " required
 " Some Linux distributions set filetype in /etc/vimrc.
 " Clear filetype flags before changing runtimepath to force Vim to
 " reload them.
-filetype off
-filetype plugin indent off
+"filetype off
+"filetype plugin indent off
 if LinuxDis() == 'Debian'
   set rtp+=/usr/shar/go/misc/vim
 else
   set rtp+=$GOROOT/misc/vim ""Fedora
 endif
-filetype plugin indent on
+"filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -130,7 +132,7 @@ function! Platform()
 endfunction
 
 "Sets how many lines of history VIM har to remember
-set history=400
+set history=600
 
 " Always use English messages & menu
 "language zh_CN.UTF-8
@@ -141,7 +143,7 @@ set history=400
 " multi-encoding setting
 if has("multi_byte")
   "set bomb
-  set fileencodings=utf-8,ucs-bom,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
+  set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
   " CJK environment detection and corresponding setting
   if v:lang =~ "^zh_CN"
     " Use cp936 to support GBK, euc-cn == gb2312
@@ -181,15 +183,14 @@ endif
 "endif
 
 "Enable filetype plugin
-"filetype plugin on
-"filetype indent on
+filetype plugin indent on
 
 "Set to auto read when a file is changed from the outside
 set autoread
 
 "Have the mouse enabled all the time:
 set mouse=a
-"set mousemodel=popup
+set mousemodel=popup
 
 "Set mapleader
 let mapleader = ","
@@ -774,9 +775,8 @@ map <leader>s? z=
 "au FileType html setlocal dict+=~/.vim/dict/css.dict
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" new file configuration
+" file header configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"for c/shell/java file，insert file descriptions automatic
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()"
 
 func SetTitle()
