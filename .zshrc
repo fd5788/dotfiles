@@ -62,13 +62,13 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode git git-prompt)
+plugins=(git git-prompt)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-####################export PATH=$HOME/bin:/usr/local/bin:$PATH
+#export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -81,6 +81,11 @@ source $ZSH/oh-my-zsh.sh
 #  export EDITOR='mvim'
 #fi
 export EDITOR='vim'
+
+## load autojump
+if [ -f /usr/share/autojump/autojump.sh ]; then
+    . /usr/share/autojump/autojump.sh
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
