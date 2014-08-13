@@ -1165,13 +1165,13 @@ endfunc
    let g:indent_guides_guide_size=1
    nmap <silent> <Leader>ig <Plug>IndentGuidesToggle
 
-   """"""""""""""""""""""""""""""
-   " vim-instant-markdown setting
-   """"""""""""""""""""""""""""""
-   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-   let g:instant_markdown_slow = 2
-   let g:instant_markdown_autostart = 0
-   map <leader>mp :InstantMarkdownPreview<CR>
+"   """"""""""""""""""""""""""""""
+"   " vim-instant-markdown setting
+"   """"""""""""""""""""""""""""""
+"   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+"   let g:instant_markdown_slow = 2
+"   let g:instant_markdown_autostart = 0
+"   map <leader>mp :InstantMarkdownPreview<CR>
 
    """"""""""""""""""""""""""""""
    " echofunc setting
@@ -1275,6 +1275,14 @@ endfunc
    """"""""""""""""""""""""""""""
    nmap <silent> <leader>nt :NERDTreeToggle<CR>
    let NERDTreeWinSize = 23
+
+   """"""""""""""""""""""""""""""
+   " vim-latex-suite setting
+   """"""""""""""""""""""""""""""
+   " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults
+   " to 'plaintex' instead of 'tex', which results in vim-latex not being
+   " loaded. The following changes the default filetype back to 'tex':
+   " let g:tex_flavor='latex'
 
    """"""""""""""""""""""""""""""
    " SrcExpl setting
