@@ -1,13 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" This vimrc is based on the vimrc by Amix:
-""       http://amix.dk/vim/vimrc.html
+"" This vimrc is based on the vimrc by Easwy Yang:
+""       http://easwy.com/
 "" You can find the latest version on:
-""       http://github.com/easwy/share/tree/master/vim/vimrc/
-""
-"" Maintainer:  Easwy Yang
-"" Last Change: Mon Oct 25 16:04:31 CST 2010
-"" Homepage:    http://easwy.com/
-"" Version:     0.2
+""       http://github.com/fd5788/dotfiles/.vimrc/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Linux Distribution
