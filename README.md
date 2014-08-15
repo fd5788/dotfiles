@@ -1,7 +1,6 @@
 #dotfiles
 
 ##Plugins
-- [test](#Test)
 - [Vundle](https://github.com/gmarik/Vundle.vim)
 - [ctrlp](https://github.com/kien/ctrlp.vim)
 - [ultisnips](https://github.com/SirVer/ultisnips)
@@ -13,26 +12,3 @@
 - [tagbar](https://github.com/majutsushi/tagbar)
 - [supertab](https://github.com/ervandew/supertab)
 - [vim-instant-markdown](https://github.com/vim-instant-markdown)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## test
