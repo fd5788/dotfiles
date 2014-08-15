@@ -885,10 +885,10 @@ endfunc
    set complete-=i
 
    " mapping
-   inoremap <expr> <CR>       pumvisible()?"\<C-Y>":"\<CR>"
-   inoremap <expr> <C-J>      pumvisible()?"\<PageDown>\<C-N>\<C-P>":"\<C-X><C-O>"
-   inoremap <expr> <C-K>      pumvisible()?"\<PageUp>\<C-P>\<C-N>":"\<C-K>"
-   inoremap <expr> <C-U>      pumvisible()?"\<C-E>":"\<C-U>"
+   inoremap <expr> <CR>       pumvisible() ? "\<C-Y>" : "\<C-g>u\<CR>"
+   inoremap <expr> <C-J>      pumvisible() ? "\<PageDown>\<C-N>\<C-P>" : "\<C-X><C-O>"
+   inoremap <expr> <C-K>      pumvisible() ? "\<PageUp>\<C-P>\<C-N>" : "\<C-K>"
+   inoremap <expr> <C-U>      pumvisible() ? "\<C-E>" : "\<C-U>"
    inoremap <C-]>             <C-X><C-]>
    inoremap <C-F>             <C-X><C-F>
    inoremap <C-D>             <C-X><C-D>
@@ -976,11 +976,11 @@ endfunc
 "   let g:SuperTabRetainCompletionType=2
 "   let g:SuperTabPluginLoaded=1 " Avoid load SuperTab Plugin
 "   let g:SuperTabDefaultCompletionType='context'
-"   let g:SuperTabContextDefaultCompletionType='<C-X><C-O>'
+"   let g:SuperTabContextDefaultCompletionType='<C-p>'
 "   let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 "   let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 "   let g:SuperTabContextDiscoverDiscovery =
-"         \ ["&completefunc:<C-X><C-U>", "&omnifunc:<C-X><C-O>"]
+"         \ ["&completefunc:<C-x><C-u>", "&omnifunc:<C-x><C-o>"]
 
    """"""""""""""""""""""""""""""
    " syntastic setting
@@ -1157,7 +1157,7 @@ endfunc
    "let g:indent_guides_enable_on_vim_startup=1
    let g:indent_guides_start_level=2
    let g:indent_guides_guide_size=1
-   nmap <silent> <Leader>ig <Plug>IndentGuidesToggle
+   nmap <silent> <leader>ig <Plug>IndentGuidesToggle
 
 "   """"""""""""""""""""""""""""""
 "   " vim-instant-markdown setting
@@ -1201,14 +1201,6 @@ endfunc
    function! AdjustWindowHeight(minheight, maxheight)
        exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
    endfunction
-
-   """"""""""""""""""""""""""""""""""
-   " a setting
-   """"""""""""""""""""""""""""""""""
-   " switch in header and source file
-   nmap <leader>ch :A<CR>
-   " show in subwindow
-   nmap <leader>sch :AS<CR>
 
    """"""""""""""""""""""""""""""
    " winmanager setting
@@ -1258,9 +1250,9 @@ endfunc
    " ctrlp setting
    """"""""""""""""""""""""""""""
    let g:ctrlp_extensions = ['funky']
-   nnoremap <Leader>fu :CtrlPFunky<Cr>
+   nnoremap <leader>fu :CtrlPFunky<Cr>
    " narrow the list down with a word under cursor
-   nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+   nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
    "SYNTAX HIGHLIGHTING (experimental)
    let g:ctrlp_funky_syntax_highlight = 1
 
@@ -1283,41 +1275,41 @@ endfunc
    "let g:tex_flavor='latex'
    "set iskeyword+=:
 
-   """"""""""""""""""""""""""""""
-   " SrcExpl setting
-   """"""""""""""""""""""""""""""
-   nmap <F8> :SrcExplToggle<CR>
-   map <leader>se :SrcExplToggle<CR>
-   " // Set the height of Source Explorer window
-   let g:SrcExpl_winHeight = 8
-   " // Set 100 ms for refreshing the Source Explorer
-   let g:SrcExpl_refreshTime = 5000
-   " // Set "Enter" key to jump into the exact definition context
-   let g:SrcExpl_jumpKey = "<ENTER>"
-   " // Set "Space" key for back from the definition context
-   let g:SrcExpl_gobackKey = "<SPACE>"
-   " // In order to avoid conflicts, the Source Explorer should know what plugins
-   " // except itself are using buffers. And you need add their buffer names into
-   " // below listaccording to the command ":buffers!"
-   let g:SrcExpl_pluginList = [
-           \ "__Tag_List__",
-           \ "_NERD_tree_"
-       \ ]
-   " // Enable/Disable the local definition searching, and note that this is not
-   " // guaranteed to work, the Source Explorer doesn't check the syntax for now.
-   " // It only searches for a match with the keyword according to command 'gd'
-   let g:SrcExpl_searchLocalDef = 1
-   " // Do not let the Source Explorer update the tags file when opening
-   let g:SrcExpl_isUpdateTags = 0
-   " // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
-   " // create/update the tags file
-   let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
-   " // Set "<F12>" key for updating the tags file artificially
-   let g:SrcExpl_updateTagsKey = "<F12>"
-   " // Set "<F3>" key for displaying the previous definition in the jump list
-   let g:SrcExpl_prevDefKey = "<F3>"
-   " // Set "<F4>" key for displaying the next definition in the jump list
-   let g:SrcExpl_nextDefKey = "<F4>"
+"   """"""""""""""""""""""""""""""
+"   " SrcExpl setting
+"   """"""""""""""""""""""""""""""
+"   nmap <F8> :SrcExplToggle<CR>
+"   map <leader>se :SrcExplToggle<CR>
+"   " // Set the height of Source Explorer window
+"   let g:SrcExpl_winHeight = 8
+"   " // Set 100 ms for refreshing the Source Explorer
+"   let g:SrcExpl_refreshTime = 5000
+"   " // Set "Enter" key to jump into the exact definition context
+"   let g:SrcExpl_jumpKey = "<ENTER>"
+"   " // Set "Space" key for back from the definition context
+"   let g:SrcExpl_gobackKey = "<SPACE>"
+"   " // In order to avoid conflicts, the Source Explorer should know what plugins
+"   " // except itself are using buffers. And you need add their buffer names into
+"   " // below listaccording to the command ":buffers!"
+"   let g:SrcExpl_pluginList = [
+"           \ "__Tag_List__",
+"           \ "_NERD_tree_"
+"       \ ]
+"   " // Enable/Disable the local definition searching, and note that this is not
+"   " // guaranteed to work, the Source Explorer doesn't check the syntax for now.
+"   " // It only searches for a match with the keyword according to command 'gd'
+"   let g:SrcExpl_searchLocalDef = 1
+"   " // Do not let the Source Explorer update the tags file when opening
+"   let g:SrcExpl_isUpdateTags = 0
+"   " // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
+"   " // create/update the tags file
+"   let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+"   " // Set "<F12>" key for updating the tags file artificially
+"   let g:SrcExpl_updateTagsKey = "<F12>"
+"   " // Set "<F3>" key for displaying the previous definition in the jump list
+"   let g:SrcExpl_prevDefKey = "<F3>"
+"   " // Set "<F4>" key for displaying the next definition in the jump list
+"   let g:SrcExpl_nextDefKey = "<F4>"
 
    """"""""""""""""""""""""""""""
    " lookupfile setting
@@ -1385,15 +1377,15 @@ endfunc
    """"""""""""""""""""""""""""""
    " FeralToggleCommentify setting
    """"""""""""""""""""""""""""""
-   let loaded_feraltogglecommentify = 1
+   ""let loaded_feraltogglecommentify = 1
    "map <silent> <leader>tc :call ToggleCommentify()<CR>j
    "imap <M-c> <ESC>:call ToggleCommentify()<CR>j
 
    """"""""""""""""""""""""""""""
    " vimgdb setting
    """"""""""""""""""""""""""""""
-   let g:vimgdb_debug_file = ""
-   run macros/gdb_mappings.vim
+   "let g:vimgdb_debug_file = ""
+   "run macros/gdb_mappings.vim
 
 "   """"""""""""""""""""""""""""""
 "   " eclim setting
@@ -1406,7 +1398,7 @@ endfunc
    au! BufEnter *.cc,*.cpp let b:fswitchdst = 'h' | let b:fswitchlocs = '.'
    au! BufEnter *.h let b:fswitchdst = 'cc,cpp' | let b:fswitchlocs = '.'
    let g:fsnonewfiles = "on"
-   nmap <silent> <Leader>of :FSHere<CR>
+   nmap <silent> <leader>of :FSHere<CR>
 
    """"""""""""""""""""""""""""""
    " tagbar setting
@@ -1414,8 +1406,7 @@ endfunc
    let g:tagbar_width = 20
    let g:tagbar_expand = 1
    "let g:tagbar_left = 1
-   nmap <silent> <Leader>tb :TagbarToggle<CR>
-
+   nmap <silent> <leader>tb :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype generic
@@ -1459,7 +1450,6 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
    function! s:GetVisualSelection()
        let save_a = @a
        silent normal! gv"ay
@@ -1478,7 +1468,7 @@ endfunc
    set diffopt+=vertical
 
    "Remove the Windows ^M
-   noremap <Leader>dm mzHmx:%s/<C-V><CR>//ge<CR>'xzt'z:delm x z<CR>
+   noremap <leader>dm mzHmx:%s/<C-V><CR>//ge<CR>'xzt'z:delm x z<CR>
 
    "Paste toggle - when pasting something in, don't indent.
    set pastetoggle=<F3>
@@ -1499,10 +1489,7 @@ endfunc
    "nnoremap ' "
 
    "A function that inserts links & anchors on a TOhtml export.
-   " Notice:
-   " Syntax used is:
-   " Link
-   " Anchor
+   " Notice: Syntax used is: Link Anchor
    function! SmartTOHtml()
     TOhtml
     try
@@ -1516,7 +1503,7 @@ endfunc
    endfunction
 
    "delete blank line
-   nmap <silent> <Leader>dbl :g/^\s*$/d<CR>
+   nmap <silent> <leader>dbl :g/^\s*$/d<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mark as loaded
