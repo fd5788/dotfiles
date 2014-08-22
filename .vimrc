@@ -5,15 +5,15 @@
 ""       http://github.com/fd5788/dotfiles/.vimrc/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Linux Distribution
-function! LinuxDis()
-    let linuxDistribution = system('cat /etc/issue | grep Debian')
-    if linuxDistribution =~ "Debian"
-        return "Debian"
-    else
-        return "Fedora"
-    endif
-endfunction
+"" Linux Distribution
+"function! LinuxDis()
+"    let linuxDistribution = system('cat /etc/issue | grep Debian')
+"    if linuxDistribution =~ "Debian"
+"        return "Debian"
+"    else
+"        return "Fedora"
+"    endif
+"endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vunble setting
@@ -38,6 +38,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/AutoClose'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -84,19 +85,6 @@ call vundle#end()            " required
 "_ see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" go-lang setting
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Some Linux distributions set filetype in /etc/vimrc.
-" Clear filetype flags before changing runtimepath to force Vim to
-" reload them.
-"filetype off
-"filetype plugin indent off
-if LinuxDis() == 'Debian'
-  set rtp+=/usr/shar/go/misc/vim
-else
-  set rtp+=$GOROOT/misc/vim ""Fedora
-endif
 "filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -501,16 +489,6 @@ set showcmd
   set t_Co=256
   set lazyredraw
   set notimeout ttimeout ttimeoutlen=50
-
-"  "define your own vim-powerline symbols
-"  let g:airline_left_sep          = ''
-"  let g:airline_left_alt_sep      = ''
-"  let g:airline_right_sep         = ''
-"  let g:airline_right_alt_sep     = ''
-"  let g:airline_fugitive_prefix   = ''
-"  let g:airline_branch_prefix     = ''
-"  let g:airline_readonly_symbol   = ''
-"  let g:airline_linecolumn_prefix = ''
 
 """"""""""""""""""""""""""""""
 " Visual
@@ -1154,13 +1132,19 @@ endfunc
    let g:indent_guides_guide_size=1
    nmap <silent> <leader>ig <Plug>IndentGuidesToggle
 
+   """"""""""""""""""""""""""""""
+   " autoclose setting
+   """"""""""""""""""""""""""""""
+   let g:AutoCloseProtectedRegions = ["Comment", "String", "Character"]
+   imap <silent> <leader>ac :AutoCloseToggle<CR>
+
 "   """"""""""""""""""""""""""""""
 "   " vim-instant-markdown setting
 "   """"""""""""""""""""""""""""""
 "   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "   let g:instant_markdown_slow = 2
 "   let g:instant_markdown_autostart = 0
-"   map <leader>mp :InstantMarkdownPreview<CR>
+"   map <leader>mp :In stantMarkdownPreview<CR>
 
    """"""""""""""""""""""""""""""
    " echofunc setting
