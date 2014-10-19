@@ -1,0 +1,71 @@
+# deb cdrom:[Debian GNU/Linux 7 _Wheezy_ - Official Snapshot i386 LIVE/INSTALL Binary 20140505-05:08]/ wheezy main
+
+# Line commented out by installer because it failed to verify:
+#deb http://security.debian.org/ wheezy/updates main
+# Line commented out by installer because it failed to verify:
+#deb-src http://security.debian.org/ wheezy/updates main
+
+## ustc stable sources
+#deb http://mirrors6.ustc.edu.cn/debian stable main contrib non-free
+#deb-src http://mirrors6.ustc.edu.cn/debian stable main contrib non-free
+#deb http://mirrors6.ustc.edu.cn/debian stable-proposed-updates main contrib non-free
+#deb-src http://mirrors6.ustc.edu.cn/debian stable-proposed-updates main contrib non-free
+
+#deb http://mirrors6.ustc.edu.cn/debian stable-backports main non-free contrib
+#deb-src http://mirrors6.ustc.edu.cn/debian stable-backports main non-free contrib
+
+#deb http://mirrors6.ustc.edu.cn/debian-security/ stable/updates main non-free contrib
+#deb-src http://mirrors6.ustc.edu.cn/debian-security/ stable/updates main non-free contrib
+
+#deb http://mirrors6.ustc.edu.cn/debian-multimedia/ stable main non-free
+#deb-src http://mirrors6.ustc.edu.cn/debian-multimedia/ stable main non-free
+
+## xdlinux stable sources
+#deb http://ftp.xdlinux.info/debian stable main non-free contrib
+#deb-src http://ftp.xdlinux.info/debian stable main non-free contrib
+#deb http://ftp.xdlinux.info/debian stable-proposed-updates main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian stable-proposed-updates main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian stable-backports main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian stable-backports main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian stable-updates main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian stable-updates main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian-security stable/updates main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian-security stable/updates main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian-multimedia/ stable main non-free
+#deb-src http://ftp.xdlinux.info/debian-multimedia/ stable main non-free
+
+## xdlinux testing sources
+#deb http://ftp.xdlinux.info/debian testing main non-free contrib
+#deb-src http://ftp.xdlinux.info/debian testing main non-free contrib
+#deb http://ftp.xdlinux.info/debian testing-proposed-updates main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian testing-proposed-updates main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian testing-updates main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian testing-updates main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian-security testing/updates main contrib non-free
+#deb-src http://ftp.xdlinux.info/debian-security testing/updates main contrib non-free
+#
+#deb http://ftp.xdlinux.info/debian-multimedia/ testing main non-free
+#deb-src http://ftp.xdlinux.info/debian-multimedia/ testing main non-free
+
+## ustc testing sources
+deb http://mirrors6.ustc.edu.cn/debian testing main contrib non-free
+deb-src http://mirrors6.ustc.edu.cn/debian testing main contrib non-free
+deb http://mirrors6.ustc.edu.cn/debian testing-proposed-updates main contrib non-free
+deb-src http://mirrors6.ustc.edu.cn/debian testing-proposed-updates main contrib non-free
+
+deb http://mirrors6.ustc.edu.cn/debian testing-updates main non-free contrib
+deb-src http://mirrors6.ustc.edu.cn/debian testing-updates main non-free contrib
+
+deb http://mirrors6.ustc.edu.cn/debian-security/ testing/updates main non-free contrib
+deb-src http://mirrors6.ustc.edu.cn/debian-security/ testing/updates main non-free contrib
+
+deb http://mirrors6.ustc.edu.cn/debian-multimedia/ testing main non-free
+deb-src http://mirrors6.ustc.edu.cn/debian-multimedia/ testing main non-free
+
+deb http://shadowsocks.org/debian testing main
