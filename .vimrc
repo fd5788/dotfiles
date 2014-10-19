@@ -35,7 +35,7 @@ Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'vim-scripts/AutoClose'
+"Plugin 'vim-scripts/AutoClose'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
@@ -87,7 +87,6 @@ call vundle#end()            " required
 
 "filetype plugin indent on
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -134,16 +133,16 @@ if has("multi_byte")
     set encoding=taiwan
     set termencoding=taiwan
     set fileencoding=taiwan
-  elseif v:lang =~ "^ko"
-    " Copied from someone's dotfile, untested
-    set encoding=euc-kr
-    set termencoding=euc-kr
-    set fileencoding=euc-kr
-  elseif v:lang =~ "^ja_JP"
-    " Copied from someone's dotfile, untested
-    set encoding=euc-jp
-    set termencoding=euc-jp
-    set fileencoding=euc-jp
+  "elseif v:lang =~ "^ko"
+  "  " Copied from someone's dotfile, untested
+  "  set encoding=euc-kr
+  "  set termencoding=euc-kr
+  "  set fileencoding=euc-kr
+  "elseif v:lang =~ "^ja_JP"
+  "  " Copied from someone's dotfile, untested
+  "  set encoding=euc-jp
+  "  set termencoding=euc-jp
+  "  set fileencoding=euc-jp
   endif
   " Detect UTF-8 locale, and replace CJK setting if needed
   if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
@@ -153,15 +152,12 @@ if has("multi_byte")
     set fileencodings=utf-8
   endif
 endif
-if &encoding ==# 'latin1' && has('gui_running')
-  set encoding=utf-8
-endif
-if Platform() == "windows"
-  set encoding=utf-8
-  set langmenu=zh_CN.UTF-8
-  "language message zh_CN.UTF-8
-  set fileencodings=ucs-bom,utf-8,gb18030,cp936,big5,euc-jp,euc-kr,latin1
-endif
+"if Platform() == "windows"
+   "set encoding=utf-8
+   "set langmenu=zh_CN.UTF-8
+   "language message zh_CN.UTF-8
+   "set fileencodings=ucs-bom,utf-8,gb18030,cp936,big5,euc-jp,euc-kr,latin1
+"endif
 
 "Enable filetype plugin
 filetype plugin indent on
