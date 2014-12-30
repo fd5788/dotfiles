@@ -11,7 +11,7 @@
 "    if linuxDistribution =~ "Debian"
 "        return "Debian"
 "    else
-"        return "Fedora"
+"        return "Archlinux"
 "    endif
 "endfunction
 
@@ -22,42 +22,43 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 "set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle/
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 let g:vundle_default_git_proto = 'git'
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim',{'name': 'vundle'}
-Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
+Plugin 'gmarik/Vundle.vim',{'name': 'Vundle'}
+"Arch Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
 Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
-Plugin 'SirVer/ultisnips'
+"Arch Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
+"Arch Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 "Plugin 'vim-scripts/AutoClose'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'scrooloose/syntastic'
+"Arch Plugin 'scrooloose/syntastic'
+"Arch Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
-Plugin 'tpope/vim-surround'
+"Arch Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
-Plugin 'tpope/vim-fugitive'
+"Arch Plugin 'tpope/vim-fugitive'
 "Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
 Plugin 'mbbill/undotree'
 Plugin 'mbbill/fencview'
 "Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'godlygeek/tabular'
-Plugin 'majutsushi/tagbar'
-Plugin 'ervandew/supertab'
+"Plugin 'majutsushi/tagbar'
+"Arch Plugin 'ervandew/supertab'
 "Plugin 'marchtea/mdtogh'
-"Plugin 'davidhalter/jedi'
+"Arch Plugin 'davidhalter/jedi'
 "Plugin 'Lokaltog/powerline'
 "Plugin 'Lokaltog/powerline-fonts'
-"Plugin 'jlanzarotta/bufexplorer'
+"Arch Plugin 'jlanzarotta/bufexplorer'
 Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
 
 ""colorscheme
@@ -68,6 +69,7 @@ Plugin 'tomasr/molokai'
 ""vim-scripts repo
 "Plugin 'Align'
 "Plugin 'AutoAlign'
+"Plugin 'taglist'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -875,13 +877,13 @@ endfunc
              \endif
    endif
 
-"   " Enable omni completion.
-"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+   " Enable omni completion.
+   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 
    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
