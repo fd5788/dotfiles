@@ -22,44 +22,58 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 "set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle/
+set rtp+=$HOME/.vim/bundle/vundle/
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 let g:vundle_default_git_proto = 'git'
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim',{'name': 'Vundle'}
-"Arch Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
+Plugin 'gmarik/Vundle.vim',{'name': 'vundle'}
+Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
 Plugin 'tacahiroy/ctrlp-funky'
-"Arch Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
-"Arch Plugin 'SirVer/ultisnips'
+Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-"Plugin 'vim-scripts/AutoClose'
 Plugin 'nathanaelkane/vim-indent-guides'
-"Arch Plugin 'scrooloose/syntastic'
-"Arch Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
-"Arch Plugin 'tpope/vim-surround'
+""compelter engine
+Plugin 'Valloric/YouCompleteMe'
+""python completer
+"Plugin 'klen/python-mode'
+Plugin 'davidhalter/jedi'
+""golang compelter
+Plugin 'nsf/gocode'
+Plugin 'Blackrush/vim-gocode'
+""csharp completer
+"Plugin 'OmniSharp/omnisharp-server'
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'tpope/vim-dispatch'
+""compelter engine
+"Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'bling/vim-airline'
 "Plugin 'bling/vim-bufferline'
-"Arch Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 "Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
-Plugin 'mbbill/undotree'
+""undo timemachine
+Plugin 'sjl/gundo.vim',{'name': 'gundo'}
+"Plugin 'mbbill/undotree'
 Plugin 'mbbill/fencview'
 "Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'godlygeek/tabular'
-"Plugin 'majutsushi/tagbar'
-"Arch Plugin 'ervandew/supertab'
+Plugin 'majutsushi/tagbar'
+Plugin 'ervandew/supertab'
 "Plugin 'marchtea/mdtogh'
-"Arch Plugin 'davidhalter/jedi'
+""statusline
+Plugin 'bling/vim-airline'
 "Plugin 'Lokaltog/powerline'
 "Plugin 'Lokaltog/powerline-fonts'
-"Arch Plugin 'jlanzarotta/bufexplorer'
-Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
+"Plugin 'jlanzarotta/bufexplorer'
+"Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
 
 ""colorscheme
 Plugin 'tomasr/molokai'
@@ -69,26 +83,14 @@ Plugin 'tomasr/molokai'
 ""vim-scripts repo
 "Plugin 'Align'
 "Plugin 'AutoAlign'
-"Plugin 'taglist'
+Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
+"Plugin 'AutoClose'
+Plugin 'vim-scripts/TaskList.vim', {'name': 'TaskList'}
+"Plugin 'Sessionman'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-"filetype plugin indent on    " required
-
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-"_ see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"filetype plugin indent on
-
+"filetype pl
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,10 +193,6 @@ nmap <silent> <leader><CR> :noh<CR>
 "Fast redraw
 nmap <silent> <leader>rr :redraw!<CR>
 
-"Fast copy and paste
-nmap <leader>p "+p
-vnoremap <leader>y "+y
-
 " For Thinkpad
 imap <F1> <ESC>
 nmap <F1> <ESC>
@@ -281,7 +279,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "Set font
 if Platform() == "linux"
   if has("gui_gtk2")
@@ -310,14 +307,14 @@ if !exists("g:vimrc_loaded")
         \set guioptions-=m <bar>
         \set guioptions-=L <Bar>
         \set guioptions-=r <bar>
-    \else <Bar>
+        \else <Bar>
         \set guioptions+=T <Bar>
         \set guioptions+=m <Bar>
         \set guioptions+=L <Bar>
         \set guioptions+=r <Bar>
-    \endif<CR>
+        \endif<CR>
 
-        colorscheme desert
+        colorscheme molokai
         "hi normal guibg=#294d4a
         set cursorline
         "set cursorcolumn
@@ -340,7 +337,11 @@ autocmd BufEnter * :syntax sync fromstart
 vnoremap <C-C> "+y
 
 " Use CTRL-Q to do what CTRL-V used to do
-"noremap <C-Q>		<C-V>
+noremap <C-Q>		<C-V>
+
+"Fast copy and paste
+nmap <leader>p "+p
+vnoremap <leader>y "+y
 
 " CTRL-V
 imap <C-V>		"+gP
@@ -352,8 +353,8 @@ exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
 if has("gui_running")
   set cursorline
   "set cursorcolumn
-  "hi cursorline guibg=#333333
-  "hi CursorColumn guibg=#333333
+  hi cursorline guibg=#333333
+  hi CursorColumn guibg=#333333
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -372,10 +373,10 @@ nmap <leader>fu :se ff=unix<CR>
 set so=7
 
 " Maximum window when GUI running
-"if has("gui_running")
-  "set lines=9999
-  "set columns=9999
-"endif
+if has("gui_running")
+  set lines=9999
+  set columns=9999
+endif
 
 "Turn on WiLd menu
 set wildmenu
@@ -438,9 +439,9 @@ set showcmd
 "  """"""""""""""""""""""""""""""
 "  " powerline
 "  """"""""""""""""""""""""""""""
-  "set t_Co=256
+"  set t_Co=256
 "  set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-"  "let g:Powerline_symbols = 'fancy'
+"  let g:Powerline_symbols = 'fancy'
 "
 "  "Escape insert mode immediately if Powerline is used in vim
 "  if ! has('gui_running')
@@ -484,8 +485,8 @@ set showcmd
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#formatter = 'unique_tail'
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
+"  let g:airline#extensions#tabline#left_sep = ' '
+"  let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#show_buffers = 1
   "let g:airline#extensions#bufferline#enabled = 1
   set t_Co=256
@@ -688,7 +689,6 @@ set foldlevelstart=99
 nmap <silent> <leader>zo zO
 vmap <silent> <leader>zo zO
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -846,7 +846,6 @@ func FormartSrc()
     exec "e! %"
 endfunc
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -885,7 +884,6 @@ endfunc
    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
-
    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    " cscope setting
    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -919,7 +917,7 @@ endfunc
    """"""""""""""""""""""""""""""
    " essential tags
    "set tags+=~/.vim/tags/cpp/glibc
-   set tags+=~/.vim/tags/cpp/stdcpp
+   "set tags+=~/.vim/tags/cpp/stdcpp
    " build tags of your own project with Ctrl-F12
    map <C-F12> :!ctags -R --sort=yes --c++-kinds=+plx --fields=+liaS --extra=+q .<CR>:set tags+=./tags<CR>
    " OmniCppComplete
@@ -934,6 +932,152 @@ endfunc
    " automatically open and close the popup menu / preview window
    "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
    "set completeopt=menuone,menu,longest,preview
+
+   """"""""""""""""""""""""""""""
+   " tabular setting
+   """"""""""""""""""""""""""""""
+   nmap <Leader>a& :Tabularize /&<CR>
+   vmap <Leader>a& :Tabularize /&<CR>
+   nmap <Leader>a= :Tabularize /=<CR>
+   vmap <Leader>a= :Tabularize /=<CR>
+   nmap <Leader>a: :Tabularize /:<CR>
+   vmap <Leader>a: :Tabularize /:<CR>
+   nmap <Leader>a:: :Tabularize /:\zs<CR>
+   vmap <Leader>a:: :Tabularize /:\zs<CR>
+   nmap <Leader>a, :Tabularize /,<CR>
+   vmap <Leader>a, :Tabularize /,<CR>
+   nmap <Leader>a,, :Tabularize /,\zs<CR>
+   vmap <Leader>a,, :Tabularize /,\zs<CR>
+   nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+   vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+   """"""""""""""""""""""""""""""
+   " gundo setting
+   """"""""""""""""""""""""""""""
+   nnoremap <Leader>u :GundoToggle<CR>
+
+   """"""""""""""""""""""""""""""
+   " omnisharp-vim setting
+   """"""""""""""""""""""""""""""
+   let g:OmniSharp_selector_ui = 'ctrlp'
+
+   " OmniSharp won't work without this setting
+   "filetype plugin on
+
+   "This is the default value, setting it isn't actually necessary
+   let g:OmniSharp_host = "http://localhost:2000"
+
+   "Set the type lookup function to use the preview window instead of the status line
+   "let g:OmniSharp_typeLookupInPreview = 1
+
+   "Timeout in seconds to wait for a response from the server
+   let g:OmniSharp_timeout = 1
+
+   "Showmatch significantly slows down omnicomplete
+   "when the first match contains parentheses.
+   set noshowmatch
+
+   "Super tab settings - uncomment the next 4 lines
+   "let g:SuperTabDefaultCompletionType = 'context'
+   "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+   "let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+   "let g:SuperTabClosePreviewOnPopupClose = 1
+
+   "don't autoselect first item in omnicomplete, show if only one item (for preview)
+   "remove preview if you don't want to see any documentation whatsoever.
+   set completeopt=longest,menuone,preview
+   " Fetch full documentation during omnicomplete requests.
+   " There is a performance penalty with this (especially on Mono)
+   " By default, only Type/Method signatures are fetched. Full documentation can still be fetched when
+   " you need it with the :OmniSharpDocumentation command.
+   " let g:omnicomplete_fetch_documentation=1
+
+   "Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
+   "You might also want to look at the echodoc plugin
+   set splitbelow
+
+   " Get Code Issues and syntax errors
+   let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+   " If you are using the omnisharp-roslyn backend, use the following
+   " let g:syntastic_cs_checkers = ['code_checker']
+   augroup omnisharp_commands
+       autocmd!
+
+       "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+       autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+       " Synchronous build (blocks Vim)
+       "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+       " Builds can also run asynchronously with vim-dispatch installed
+       autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
+       " automatic syntax check on events (TextChanged requires Vim 7.4)
+       autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+       " Automatically add new cs files to the nearest project on save
+       autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+       "show type information automatically when the cursor stops moving
+       autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+       "The following commands are contextual, based on the current cursor position.
+
+       autocmd FileType cs nnoremap <leader>gd :OmniSharpGotoDefinition<cr>
+       autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+       autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+       autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+       autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+       "finds members in the current buffer
+       autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
+       " cursor can be anywhere on the line containing an issue
+       autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+       autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+       autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+       autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+       "navigate up by method/property/field
+       autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+       "navigate down by method/property/field
+       autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+
+   augroup END
+
+   " this setting controls how long to wait (in ms) before fetching type / symbol information.
+   set updatetime=500
+   " Remove 'Press Enter to continue' message when type information is longer than one line.
+   set cmdheight=2
+
+   " Contextual code actions (requires CtrlP or unite.vim)
+   nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
+   " Run code actions with text selected in visual mode to extract method
+   vnoremap <leader><space> :call OmniSharp#GetCodeActions('visual')<cr>
+
+   " rename with dialog
+   nnoremap <leader>nm :OmniSharpRename<cr>
+   nnoremap <F2> :OmniSharpRename<cr>
+   " rename without dialog - with cursor on the symbol to rename... ':Rename newname'
+   command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+
+   " Force OmniSharp to reload the solution. Useful when switching branches etc.
+   nnoremap <leader>rl :OmniSharpReloadSolution<cr>
+   nnoremap <leader>cf :OmniSharpCodeFormat<cr>
+   " Load the current .cs file to the nearest project
+   nnoremap <leader>tp :OmniSharpAddToProject<cr>
+
+   " (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
+   nnoremap <leader>ss :OmniSharpStartServer<cr>
+   nnoremap <leader>sp :OmniSharpStopServer<cr>
+
+   " Add syntax highlighting for types and interfaces
+   nnoremap <leader>th :OmniSharpHighlightTypes<cr>
+   "Don't ask to save when changing buffers (i.e. when jumping to a type definition)
+   set hidden
+
+   """"""""""""""""""""""""""""""
+   " sessionman setting
+   """"""""""""""""""""""""""""""
+   set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
+   nmap <leader>sl :SessionList<CR>
+   nmap <leader>ss :SessionSave<CR>
+   nmap <leader>sc :SessionClose<CR>
 
    """"""""""""""""""""""""""""""
    " ultisnips setting
@@ -971,79 +1115,92 @@ endfunc
    let g:syntastic_enable_balloons = 1
 
    """"""""""""""""""""""""""""""
-   " neocomplete setting
+   " youcomplete setting
    """"""""""""""""""""""""""""""
+   let g:ycm_global_ycm_extra_conf = ".vim/.ycm_extra_conf.py"
+   let g:ycm_key_list_select_completion=[]
+   let g:ycm_key_list_previous_completion=[]
+   let g:ycm_error_symbol = '>>'
+   let g:ycm_warning_symbol = '>*'
+   nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+   nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+   nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+   nmap <F4> :YcmDiags<CR>
 
-   "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-   " Disable AutoComplPop.
-   let g:acp_enableAtStartup = 0
-   " Use neocomplete.
-   let g:neocomplete#enable_at_startup = 1
-   " Use smartcase.
-   let g:neocomplete#enable_smart_case = 1
-   " Set minimum syntax keyword length.
-   let g:neocomplete#sources#syntax#min_keyword_length = 3
-   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"   """"""""""""""""""""""""""""""
+"   " neocomplete setting
+"   """"""""""""""""""""""""""""""
+"   "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+"   " Disable AutoComplPop.
+"   let g:acp_enableAtStartup = 0
+"   " Use neocomplete.
+"   let g:neocomplete#enable_at_startup = 1
+"   " Use smartcase.
+"   let g:neocomplete#enable_smart_case = 1
+"   " Set minimum syntax keyword length.
+"   let g:neocomplete#sources#syntax#min_keyword_length = 3
+"   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"
+"   " Define dictionary.
+"   let g:neocomplete#sources#dictionary#dictionaries = {
+"       \ 'default' : '',
+"       \ 'vimshell' : $HOME.'/.vimshell_hist',
+"       \ 'scheme' : $HOME.'/.gosh_completions'
+"           \ }
+"
+"   " Define keyword.
+"   if !exists('g:neocomplete#keyword_patterns')
+"       let g:neocomplete#keyword_patterns = {}
+"   endif
+"   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"
+"   " Plugin key-mappings.
+"   inoremap <expr><C-g>     neocomplete#undo_completion()
+"   inoremap <expr><C-l>     neocomplete#complete_common_string()
+"   " Recommended key-mappings.
+"   " <CR>: close popup and save indent.
+"   inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"   function! s:my_cr_function()
+"     return neocomplete#close_popup() . "\<CR>"
+"     " For no inserting <CR> key.
+"     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+"   endfunction
+"   " <Tab>: completion.
+"   inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
+"   " <C-h>, <BS>: close popup and delete backword char.
+"   inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"   inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"   inoremap <expr><C-y>  neocomplete#close_popup()
+"   inoremap <expr><C-e>  neocomplete#cancel_popup()
+"   " Close popup by <Space>.
+"   "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+"
+"   " For cursor moving in insert mode(Not recommended)
+"   "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+"   "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+"   "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+"   "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+"   " Or set this.
+"   "let g:neocomplete#enable_cursor_hold_i = 1
+"   " Or set this.
+"   "let g:neocomplete#enable_insert_char_pre = 1
+"
+"   " AutoComplPop like behavior.
+"   "let g:neocomplete#enable_auto_select = 1
+"
+"   " Shell like behavior(not recommended).
+"   "set completeopt+=longest
+"   "let g:neocomplete#enable_auto_select = 1
+"   "let g:neocomplete#disable_auto_complete = 1
+"   "inoremap <expr><Tab>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-   " Define dictionary.
-   let g:neocomplete#sources#dictionary#dictionaries = {
-       \ 'default' : '',
-       \ 'vimshell' : $HOME.'/.vimshell_hist',
-       \ 'scheme' : $HOME.'/.gosh_completions'
-           \ }
-
-   " Define keyword.
-   if !exists('g:neocomplete#keyword_patterns')
-       let g:neocomplete#keyword_patterns = {}
-   endif
-   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-   " Plugin key-mappings.
-   inoremap <expr><C-g>     neocomplete#undo_completion()
-   inoremap <expr><C-l>     neocomplete#complete_common_string()
-   " Recommended key-mappings.
-   " <CR>: close popup and save indent.
-   inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-   function! s:my_cr_function()
-     return neocomplete#close_popup() . "\<CR>"
-     " For no inserting <CR> key.
-     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-   endfunction
-   " <Tab>: completion.
-   inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
-   " <C-h>, <BS>: close popup and delete backword char.
-   inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-   inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-   inoremap <expr><C-y>  neocomplete#close_popup()
-   inoremap <expr><C-e>  neocomplete#cancel_popup()
-   " Close popup by <Space>.
-   "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-   " For cursor moving in insert mode(Not recommended)
-   "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-   "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-   "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-   "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-   " Or set this.
-   "let g:neocomplete#enable_cursor_hold_i = 1
-   " Or set this.
-   "let g:neocomplete#enable_insert_char_pre = 1
-
-   " AutoComplPop like behavior.
-   "let g:neocomplete#enable_auto_select = 1
-
-   " Shell like behavior(not recommended).
-   "set completeopt+=longest
-   "let g:neocomplete#enable_auto_select = 1
-   "let g:neocomplete#disable_auto_complete = 1
-   "inoremap <expr><Tab>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-"   "" Enable omni completion.
-"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+   "" Enable omni completion.
+   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+   autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
    " Enable heavy omni completion.
    if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -1117,7 +1274,6 @@ endfunc
    let Tlist_Exit_OnlyWindow = 1
    let Tlist_Use_Right_Window = 1
    nmap <silent> <leader>tl :Tlist<CR>
-
 
    """"""""""""""""""""""""""""""
    " indexer setting
@@ -1197,7 +1353,7 @@ endfunc
 "   """""""""""""""""""""""""""""""""""
 "   " winmanager setting for NERDTree
 "   """""""""""""""""""""""""""""""""""
-"   " NERD_Tree集成到WinManager
+"   " NERD_Tree for WinManager
 "   let g:NERDTree_title="[NERDTree]"
 "   function! NERDTree_Start()
 "       exec 'NERDTree'
@@ -1228,7 +1384,7 @@ endfunc
      \ }
 
    """"""""""""""""""""""""""""""
-   " ctrlp setting
+   " ctrlp funky setting
    """"""""""""""""""""""""""""""
    let g:ctrlp_extensions = ['funky']
    nnoremap <leader>fu :CtrlPFunky<Cr>
@@ -1292,44 +1448,44 @@ endfunc
 "   " // Set "<F4>" key for displaying the next definition in the jump list
 "   let g:SrcExpl_nextDefKey = "<F4>"
 
-   """"""""""""""""""""""""""""""
-   " lookupfile setting
-   """"""""""""""""""""""""""""""
-   let g:LookupFile_MinPatLength = 2
-   let g:LookupFile_PreserveLastPattern = 0
-   let g:LookupFile_PreservePatternHistory = 0
-   let g:LookupFile_AlwaysAcceptFirst = 1
-   let g:LookupFile_AllowNewFiles = 0
-   let g:LookupFile_UsingSpecializedTags = 1
-   let g:LookupFile_Bufs_LikeBufCmd = 0
-   let g:LookupFile_ignorecase = 1
-   let g:LookupFile_smartcase = 1
-   if filereadable("./filenametags")
-       let g:LookupFile_TagExpr = '"./filenametags"'
-   endif
-   nmap <silent> <leader>lk :LUTags<CR>
-   nmap <silent> <leader>ll :LUBufs<CR>
-   nmap <silent> <leader>lw :LUWalk<CR>
-
-   " lookup file with ignore case
-   function! LookupFile_IgnoreCaseFunc(pattern)
-       let _tags = &tags
-       try
-           let &tags = eval(g:LookupFile_TagExpr)
-           let newpattern = '\c' . a:pattern
-           let tags = taglist(newpattern)
-       catch
-           echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-           return ""
-       finally
-           let &tags = _tags
-       endtry
-
-       " Show the matches for what is typed so far.
-       let files = map(tags, 'v:val["filename"]')
-       return files
-   endfunction
-   let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
+"   """"""""""""""""""""""""""""""
+"   " lookupfile setting
+"   """"""""""""""""""""""""""""""
+"   let g:LookupFile_MinPatLength = 2
+"   let g:LookupFile_PreserveLastPattern = 0
+"   let g:LookupFile_PreservePatternHistory = 0
+"   let g:LookupFile_AlwaysAcceptFirst = 1
+"   let g:LookupFile_AllowNewFiles = 0
+"   let g:LookupFile_UsingSpecializedTags = 1
+"   let g:LookupFile_Bufs_LikeBufCmd = 0
+"   let g:LookupFile_ignorecase = 1
+"   let g:LookupFile_smartcase = 1
+"   if filereadable("./filenametags")
+"       let g:LookupFile_TagExpr = '"./filenametags"'
+"   endif
+"   nmap <silent> <leader>lk :LUTags<CR>
+"   nmap <silent> <leader>ll :LUBufs<CR>
+"   nmap <silent> <leader>lw :LUWalk<CR>
+"
+"   " lookup file with ignore case
+"   function! LookupFile_IgnoreCaseFunc(pattern)
+"       let _tags = &tags
+"       try
+"           let &tags = eval(g:LookupFile_TagExpr)
+"           let newpattern = '\c' . a:pattern
+"           let tags = taglist(newpattern)
+"       catch
+"           echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
+"           return ""
+"       finally
+"           let &tags = _tags
+"       endtry
+"
+"       " Show the matches for what is typed so far.
+"       let files = map(tags, 'v:val["filename"]')
+"       return files
+"   endfunction
+"   let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
    """"""""""""""""""""""""""""""
    " markbrowser setting
@@ -1420,7 +1576,6 @@ endfunc
    """""""""""""""""""""""""""""""
    au FileType html set ft=xml
    au FileType html set syntax=html
-
 
    """"""""""""""""""""""""""""""
    " C/C++
