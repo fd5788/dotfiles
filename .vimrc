@@ -74,6 +74,7 @@ Plugin 'bling/vim-airline'
 "Plugin 'Lokaltog/powerline-fonts'
 "Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
+Plugin 'rizzatti/dash.vim'
 
 ""colorscheme
 Plugin 'tomasr/molokai'
@@ -372,11 +373,11 @@ nmap <leader>fu :se ff=unix<CR>
 "Set 7 lines to the curors - when moving vertical..
 set so=7
 
-" Maximum window when GUI running
-if has("gui_running")
-  set lines=9999
-  set columns=9999
-endif
+"" Maximum window when GUI running
+"if has("gui_running")
+"  set lines=9999
+"  set columns=9999
+"endif
 
 "Turn on WiLd menu
 set wildmenu
@@ -684,10 +685,13 @@ endif
 "Enable folding, I find it very useful
 set fen
 set fdl=0
+set foldmethod=indent
 set foldlevelstart=99
 "set nofoldenable
 nmap <silent> <leader>zo zO
 vmap <silent> <leader>zo zO
+"enable folding with space
+nnoremap <space> za
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text options
@@ -699,16 +703,16 @@ set softtabstop=4
 
 map <leader>t2 :set shiftwidth=2<CR>
 map <leader>t4 :set shiftwidth=4<CR>
-au FileType html,python,vim,javascript,xml setl shiftwidth=2
-au FileType html,python,vim,javascript setl tabstop=2
+au FileType html,python,vim,javascript,xml setl shiftwidth=4
+au FileType html,python,vim,javascript setl tabstop=4
 au FileType java,c,cpp setl shiftwidth=4
 au FileType java setl tabstop=4
 au FileType txt setl lbr
-au FileType txt setl tw=78
+au FileType txt setl tw=79
 
 set smarttab
 "set lbr
-"set tw=78
+set tw=79
 
 """"""""""""""""""""""""""""""
 " Indent
@@ -722,6 +726,15 @@ set cindent
 "Wrap lines
 set wrap
 
+"PEP8 python indent style
+au BufNewFile, BufRead *,py
+      \ tabstop=4
+      \ softtabstop=4
+      \ shiftwidth=4
+      \ textwidth=4
+      \ set expandtab
+      \ set autoindent
+      \ set fileformat=unix
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell checking
