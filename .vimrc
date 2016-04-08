@@ -84,7 +84,7 @@ Plugin 'tomasr/molokai'
 ""vim-scripts repo
 "Plugin 'Align'
 "Plugin 'AutoAlign'
-Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
+"Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
 "Plugin 'AutoClose'
 Plugin 'vim-scripts/TaskList.vim', {'name': 'TaskList'}
 "Plugin 'Sessionman'
@@ -326,10 +326,10 @@ if !exists("g:vimrc_loaded")
 endif " exists(...)
 
 "Some nice mapping to switch syntax (useful if one mixes different languages in one file)
-map <leader>1 :set syntax=c<CR>
-map <leader>2 :set syntax=xhtml<CR>
-map <leader>3 :set syntax=python<CR>
-map <leader>4 :set ft=javascript<CR>
+map <leader>cc :set syntax=c<CR>
+map <leader>xhtml :set syntax=xhtml<CR>
+map <leader>py :set syntax=python<CR>
+map <leader>js :set ft=javascript<CR>
 map <leader>$ :syntax sync fromstart<CR>
 
 autocmd BufEnter * :syntax sync fromstart
@@ -357,6 +357,59 @@ if has("gui_running")
   hi cursorline guibg=#333333
   hi CursorColumn guibg=#333333
 endif
+
+"" reference k-vim
+" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
+" 好处：误删什么的，如果以前屏幕打开，可以找回
+set t_ti= t_te=
+
+"swith buffer
+nnoremap [b :bprevious<cr>
+nnoremap ]b :bnext<cr>
+" swith buffer by direcition keys
+noremap <left> :bp<CR>
+noremap <right> :bn<CR>
+
+" tab operation
+" http://vim.wikia.com/wiki/Alternative_tab_navigation
+" http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
+
+"swithc tab
+map <leader>th :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tj :tabnext<cr>
+map <leader>tk :tabprev<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprev<cr>
+
+map <leader>te :tabedit<cr>
+map <leader>td :tabclose<cr>
+map <leader>tm :tabm<cr>
+
+"switch tab in normal
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" Toggles between the active and last active tab "
+" The first tab is always 1 "
+let g:last_active_tab = 1
+" nnoremap <leader>gt :execute 'tabnext ' . g:last_active_tab<cr>
+" nnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
+" vnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
+nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+autocmd TabLeave * let g:last_active_tab = tabpagenr()
+
+"newtab  Ctrl+t
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fileformats
@@ -1275,24 +1328,24 @@ endfunc
    "hi MBENoraml guibg=black ctermbg=black
    "hi MBEVisualNormal guibg=green ctermbg=green
 
-   """"""""""""""""""""""""""""""
-   " taglist setting
-   """"""""""""""""""""""""""""""
-   if Platform() == "windows"
-     let Tlist_Ctags_Cmd = 'ctags'
-   elseif Platform() == "linux"
-     let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-   endif
-   let Tlist_Show_One_File = 1
-   let Tlist_Exit_OnlyWindow = 1
-   let Tlist_Use_Right_Window = 1
-   nmap <silent> <leader>tl :Tlist<CR>
+   """""""""""""""""""""""""""""""
+   "" taglist setting
+   """""""""""""""""""""""""""""""
+   "if Platform() == "windows"
+   "  let Tlist_Ctags_Cmd = 'ctags'
+   "elseif Platform() == "linux"
+   "  let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+   "endif
+   "let Tlist_Show_One_File = 1
+   "let Tlist_Exit_OnlyWindow = 1
+   "let Tlist_Use_Right_Window = 1
+   "nmap <silent> <leader>tl :Tlist<CR>
 
    """"""""""""""""""""""""""""""
    " indexer setting
    """"""""""""""""""""""""""""""
    " indexer parameters for ctags
-   let g:indexer_ctagsCommandLineOptions="--c++-kinds=+plx --fields=+liaS --extra=+q --language-force=c++"
+   "let g:indexer_ctagsCommandLineOptions="--c++-kinds=+plx --fields=+liaS --extra=+q --language-force=c++"
 
    """"""""""""""""""""""""""""""
    " vim-indent-guides setting
@@ -1325,7 +1378,7 @@ endfunc
    """"""""""""""""""""""""""""""
    " quickfix setting
    """"""""""""""""""""""""""""""
-   nmap <leader>cn :cn<CR>
+   "nmap <leader>cn :cn<CR>
    nmap <leader>cp :cp<CR>
    nmap <leader>cw :cw 10<CR>
    nmap <leader>cc :botright lw 10<CR>

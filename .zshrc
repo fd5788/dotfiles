@@ -43,33 +43,41 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-prompt)
+plugins=(git git-prompt autojump osx)
 
 source $ZSH/oh-my-zsh.sh
 
 ## User configuration
 
-#export PATH=/usr/local/bin:$PATH
-#export MANPATH="/usr/local/man:$MANPATH"
-#zsh-completions
-fpath=(%ANDROID_HOME/tools /usr/local/share/zsh-completions $fpath)
-
 ##android
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:/usr/local/sbin
-##golang
-#gopath
+#export ANDROID_HOME=~/Library/Android/sdk
+#export PATH=$PATH:$ANDROID_HOME/tools:/usr/local/sbin
+#old version for unity3
+export ANDROID_HOME=~/Develop/android/sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools:/usr/local/sbin
+
+##golang pkg version
+#export GOROOT=/usr/local/go
+#homebrew version
+#export GOROOT=/usr/local/opt/go/libexec/bin
 export GOPATH=$HOME/workspace/go
-export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin
+export PATH=$PATH$$GOPATH/bin
+#export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 ## macports
 #export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 #export MANPATH=/opt/local/share/man:$MANPATH
 #export DISPLAY=:0.0
 
+#zsh-completions
+fpath=($ANDROID_HOME/tools /usr/local/share/zsh-completions $fpath)
+
+#export PATH=/usr/local/bin:$PATH
+#export MANPATH=/usr/local/man:$MANPATH
+
 # homebrew for github
 if [ -f /usr/local/bin/brew ]; then
-    export HOMEBREW_GITHUB_API_TOKEN=7e14f6b8d43cce08d2a0b6dc043cfcf4d34ebd9c
+    export HOMEBREW_GITHUB_API_TOKEN=9d081c6a773f89b13bb67bee59c33b9bae1469cb
 fi
 
 # You may need to manually set your language environment
@@ -107,12 +115,12 @@ fi
 ##alias {{{
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rm -i'
+#alias rm='rm -i'
 #alias ls='ls -F --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias lh='ls -hAl'
 alias l='ls -CF'
 #alias grep='grep --color=auto'
-alias trash='trash-put'
+#alias trash='trash-put'
 ##}}}
