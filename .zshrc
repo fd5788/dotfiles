@@ -124,3 +124,8 @@ alias l='ls -CF'
 #alias grep='grep --color=auto'
 #alias trash='trash-put'
 ##}}}
+
+#vpn setting
+#export http_proxy=socks5://localhost:1080
+#export hppt_proxy=http://127.0.0.1:1080
+#export https_proxy=http://127.0.0.1:1080
