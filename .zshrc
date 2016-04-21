@@ -77,7 +77,7 @@ fpath=($ANDROID_HOME/tools /usr/local/share/zsh-completions $fpath)
 
 # homebrew for github
 if [ -f /usr/local/bin/brew ]; then
-    export HOMEBREW_GITHUB_API_TOKEN=9d081c6a773f89b13bb67bee59c33b9bae1469cb
+    export HOMEBREW_GITHUB_API_TOKEN=a56e8d1b60e816cbd9ed697d8dd1ad4121049460
 fi
 
 # You may need to manually set your language environment
