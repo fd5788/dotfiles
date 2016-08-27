@@ -29,38 +29,41 @@ call vundle#begin()
 let g:vundle_default_git_proto = 'git'
 
 " let Vundle manage Vundle, required
+Plugin 'szw/vim-ctrlspace'
 Plugin 'gmarik/Vundle.vim',{'name': 'vundle'}
 Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
 Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'mileszs/ack.vim',{'name': 'ack'}
 Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-""compelter engine
-Plugin 'Valloric/YouCompleteMe'
 ""python completer
 "Plugin 'klen/python-mode'
 Plugin 'davidhalter/jedi'
 ""golang compelter
 Plugin 'nsf/gocode'
-Plugin 'Blackrush/vim-gocode'
+Plugin 'fatih/vim-go'
+"Plugin 'Blackrush/vim-gocode'
 ""csharp completer
 "Plugin 'OmniSharp/omnisharp-server'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 ""compelter engine
+Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-"Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+"Plugin 'bling/vim-bufferline'
 "Plugin 'edkolev/tmuxline.vim',{'name': 'tmuxline'}
 ""undo timemachine
-Plugin 'sjl/gundo.vim',{'name': 'gundo'}
-"Plugin 'mbbill/undotree'
+"Plugin 'sjl/gundo.vim',{'name': 'gundo'}
+Plugin 'mbbill/undotree'
 Plugin 'mbbill/fencview'
 "Plugin 'wesleyche/SrcExpl'
 Plugin 'bronson/vim-trailing-whitespace'
@@ -70,22 +73,22 @@ Plugin 'ervandew/supertab'
 "Plugin 'marchtea/mdtogh'
 ""statusline
 Plugin 'bling/vim-airline'
-"Plugin 'Lokaltog/powerline'
-"Plugin 'Lokaltog/powerline-fonts'
+"Plugin 'powerline/powerline'
+Plugin 'powerline/fonts'
 "Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
-Plugin 'rizzatti/dash.vim'
+Plugin 'rizzatti/dash.vim',{'name': 'dash'}
 
 ""colorscheme
 Plugin 'tomasr/molokai'
 "Plugin 'flazz/vim-colorschemes'
-"Plugin 'altercation/vim-colors-solarized'
+""Plugin 'altercation/vim-colors-solarized'
 
 ""vim-scripts repo
 "Plugin 'Align'
 "Plugin 'AutoAlign'
 "Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
-"Plugin 'AutoClose'
+Plugin 'AutoClose'
 Plugin 'vim-scripts/TaskList.vim', {'name': 'TaskList'}
 "Plugin 'Sessionman'
 
@@ -153,7 +156,7 @@ if has("multi_byte")
   if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
     set encoding=utf-8
     set termencoding=utf-8
-    ""set fileencodings=utf-8,chinese,gb18030,cp936,big5
+    set fileencodings=utf-8,chinese,gb18030,cp936,big5
     set fileencodings=utf-8
   endif
 endif
@@ -338,7 +341,7 @@ autocmd BufEnter * :syntax sync fromstart
 vnoremap <C-C> "+y
 
 " Use CTRL-Q to do what CTRL-V used to do
-noremap <C-Q>		<C-V>
+noremap <C-Q> <C-V>
 
 "Fast copy and paste
 nmap <leader>p "+p
@@ -363,9 +366,10 @@ endif
 " 好处：误删什么的，如果以前屏幕打开，可以找回
 set t_ti= t_te=
 
-"swith buffer
-nnoremap [b :bprevious<cr>
-nnoremap ]b :bnext<cr>
+""swith buffer (using ctrlspace plugin recommended)
+"nnoremap [b :bprevious<cr>
+"nnoremap ]b :bnext<cr>
+
 " swith buffer by direcition keys
 noremap <left> :bp<CR>
 noremap <right> :bn<CR>
@@ -410,6 +414,13 @@ autocmd TabLeave * let g:last_active_tab = tabpagenr()
 "newtab  Ctrl+t
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
+
+" Go to home and end using capitalized directions
+noremap H ^
+noremap L $
+
+" Map ; to : and save a million keystrokes 用于快速进入命令行
+nnoremap ; :
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fileformats
@@ -537,8 +548,14 @@ set showcmd
   """"""""""""""""""""""""""""""
   let g:airline_theme = 'powerlineish'
   let g:airline_powerline_fonts = 1
+
   let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#formatter = 'unique_tail'
+  let g:airline#extensions#tabline#buffer_nr_show = 1
+
+  nnoremap <C-N> :bn<CR>
+  nnoremap <C-P> :bp<CR>
+
+"  let g:airline#extensions#tabline#formatter = 'unique_tail'
 "  let g:airline#extensions#tabline#left_sep = ' '
 "  let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline#extensions#tabline#show_buffers = 1
@@ -889,7 +906,7 @@ endfunc
 
 "code style optimization
 map <F6> :call FormartSrc()<CR><CR>
-func FormartSrc()
+func! FormartSrc()
     exec "w"
     if &filetype == 'c'
         exec "!astyle --style=ansi -a --suffix=none %"
@@ -999,6 +1016,53 @@ endfunc
    "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
    "set completeopt=menuone,menu,longest,preview
 
+   """"""""""""""""""""""""""""""
+   " vim-ctrlspace setting
+   """"""""""""""""""""""""""""""
+   if has("gui_running")
+    " Settings for MacVim and Inconsolata font
+    let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+   endif
+
+   if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+   endif
+
+    """"""""""""""""""""""""""""""
+    " vim-go setting
+    """"""""""""""""""""""""""""""
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_fmt_fail_silently = 1
+    let g:go_fmt_autosave = 0
+    let g:go_play_open_browser = 0
+    let g:go_fmt_command = "goimports"
+    "let g:go_bin_path = expand("~/.vim/bundle")
+
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+    au FileType go nmap <leader>r <Plug>(go-run)
+    au FileType go nmap <leader>b <Plug>(go-build)
+    au FileType go nmap <leader>t <Plug>(go-test)
+    au FileType go nmap <leader>c <Plug>(go-coverage)
+
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+    au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+    au FileType go nmap <Leader>gd <Plug>(go-doc)
+    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+    au FileType go nmap <Leader>s <Plug>(go-implements)
+
+    au FileType go nmap <Leader>i <Plug>(go-info)
+
+    au FileType go nmap <Leader>e <Plug>(go-rename)
    """"""""""""""""""""""""""""""
    " tabular setting
    """"""""""""""""""""""""""""""
@@ -1362,13 +1426,11 @@ endfunc
    let g:AutoCloseProtectedRegions = ["Comment", "String", "Character"]
    imap <silent> <leader>ac :AutoCloseToggle<CR>
 
-"   """"""""""""""""""""""""""""""
-"   " vim-instant-markdown setting
-"   """"""""""""""""""""""""""""""
-"   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-"   let g:instant_markdown_slow = 2
-"   let g:instant_markdown_autostart = 0
-"   map <leader>mp :In stantMarkdownPreview<CR>
+   """"""""""""""""""""""""""""""
+   " vim-markdown setting
+   """"""""""""""""""""""""""""""
+   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+   let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
    """"""""""""""""""""""""""""""
    " echofunc setting
@@ -1673,22 +1735,20 @@ endfunc
    noremap <leader>dm mzHmx:%s/<C-V><CR>//ge<CR>'xzt'z:delm x z<CR>
 
    "Paste toggle - when pasting something in, don't indent.
-   set pastetoggle=<F3>
-
-   "Remove indenting on empty lines
-   "map <F2> :%s/\s*$//g<CR>:noh<CR>''
+   nnoremap <F2> :set invpaste paste?<CR>
+   set pastetoggle=<F2>
 
    "Super paste
-   "inoremap <C-v> <esc>:set paste<CR>mui<C-R>+<esc>mv'uV'v=:set nopaste<CR>
+   inoremap <C-v> <esc>:set paste<CR>mui<C-R>+<esc>mv'uV'v=:set nopaste<CR>
+
+   "Remove indenting on empty lines
+   map <F3> :%s/\s*$//g<CR>:noh<CR>''
 
    "Fast Ex command
    "nnoremap ; :
 
    "For mark move
    "nnoremap <leader>' '
-
-   "Fast copy
-   "nnoremap ' "
 
    "A function that inserts links & anchors on a TOhtml export.
    " Notice: Syntax used is: Link Anchor
