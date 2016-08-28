@@ -49,7 +49,7 @@ Plugin 'fatih/vim-go'
 "Plugin 'Blackrush/vim-gocode'
 ""csharp completer
 "Plugin 'OmniSharp/omnisharp-server'
-Plugin 'OmniSharp/omnisharp-vim'
+"Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 ""compelter engine
 Plugin 'Valloric/YouCompleteMe'
@@ -72,7 +72,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'ervandew/supertab'
 "Plugin 'marchtea/mdtogh'
 ""statusline
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 "Plugin 'powerline/powerline'
 Plugin 'powerline/fonts'
 "Plugin 'jlanzarotta/bufexplorer'
