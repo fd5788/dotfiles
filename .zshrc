@@ -3,17 +3,16 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-#ZSH_THEME="robbyrussell"
 ZSH_THEME="bira"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+#DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+ export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -36,6 +35,8 @@ DISABLE_AUTO_UPDATE="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -59,10 +60,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools:/usr/local/sbin
 ##golang pkg version
 #export GOROOT=/usr/local/go
 #homebrew version
-#export GOROOT=/usr/local/opt/go/libexec/bin
+export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/workspace/go
-export PATH=$PATH$$GOPATH/bin
-#export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+#rust
+export RUSTPATH=~/.rust
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$RUSTPATH/bin
 
 ## macports
 #export PATH=/opt/local/bin:/opt/local/sbin:$PATH
@@ -126,6 +128,6 @@ alias l='ls -CF'
 ##}}}
 
 #vpn setting
-#export http_proxy=socks5://localhost:1080
-#export hppt_proxy=http://127.0.0.1:1080
-#export https_proxy=http://127.0.0.1:1080
+#export http_proxy=socks5://localhost:8118
+#export http_proxy=http://127.0.0.1:8118
+#export https_proxy=http://127.0.0.1:8118
