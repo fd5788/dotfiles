@@ -51,19 +51,23 @@ source $ZSH/oh-my-zsh.sh
 ## User configuration
 
 ##android
-#export ANDROID_HOME=~/Library/Android/sdk
-#export PATH=$PATH:$ANDROID_HOME/tools:/usr/local/sbin
+#android ndk
+export ANDROID_NDK_ROOT=/Users/fd5788/Library/Android/ndk
+export PATH=$PATH:$ANDROID_NDK_ROOT
+#android sdk
+export ANDROID_SDK_ROOT=/Users/fd5788/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools
 #old version for unity3
-export ANDROID_HOME=~/Develop/android/sdk
-export PATH=$PATH:$ANDROID_HOME/platform-tools:/usr/local/sbin
+#export ANDROID_HOME=/Users/fd5788/Develop/android/sdk
+#export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 ##golang pkg version
 #export GOROOT=/usr/local/go
 #homebrew version
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/workspace/go
-#rust
-export RUSTPATH=~/.rust
+##rust
+export RUSTPATH=/Users/fd5788/.cargo
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$RUSTPATH/bin
 
 ## macports
@@ -72,7 +76,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$RUSTPATH/bin
 #export DISPLAY=:0.0
 
 #zsh-completions
-fpath=($ANDROID_HOME/tools /usr/local/share/zsh-completions $fpath)
+fpath=($ANDROID_SDK_ROOT/tools /usr/local/share/zsh-completions $fpath)
 
 #export PATH=/usr/local/bin:$PATH
 #export MANPATH=/usr/local/man:$MANPATH
@@ -83,7 +87,10 @@ if [ -f /usr/local/bin/brew ]; then
 fi
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
+#export LANG=en_US.UTF-8
+### for cocos package
+export LC_CTYPE=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -131,3 +138,38 @@ alias l='ls -CF'
 #export http_proxy=socks5://localhost:8118
 #export http_proxy=http://127.0.0.1:8118
 #export https_proxy=http://127.0.0.1:8118
+
+# Add environment variable COCOS_CONSOLE_ROOT for ocos2d-x
+export COCOS_CONSOLE_ROOT=/Users/fd5788/Library/cocos2d-x/cocos2d-x-3.14.1/tools/cocos2d-console/bin
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable COCOS_X_ROOT for cocos2d-x
+export COCOS_X_ROOT=/Users/fd5788/Library/cocos2d-x
+export PATH=$COCOS_X_ROOT:$PATH
+
+# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
+export COCOS_TEMPLATES_ROOT=/Users/fd5788/Library/cocos2d-x/cocos2d-x-3.14.1/templates
+export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+
+# Add environment variable NDK_ROOT for cocos2d-x
+export NDK_ROOT=/Users/fd5788/Library/Android/ndk
+export PATH=$NDK_ROOT:$PATH
+
+# Add environment variable ANT_ROOT for cocos2d-x
+export ANT_ROOT=/usr/local/Cellar/ant/1.10.1/bin
+export PATH=$ANT_ROOT:$PATH
+
+# add by quick-cocos2d-x setup, DATE: 2017-04-19 TIME: 01:42:51
+export QUICK_V3_ROOT=`cat ~/.QUICK_V3_ROOT`
+export PATH=$PATH:$QUICK_V3_ROOT/quick/bin
+
+#qt5
+export PATH=/usr/local/opt/qt5/bin:$PATH
+#latex
+#export PATH=$PATH:/usr/local/texlive/2016/bin
+
+eval "$(thefuck --alias)"
+eval "$(jenv init -)"
+
+##wine debug
+#export WINEDEBUG=-all
