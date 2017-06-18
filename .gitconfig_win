@@ -1,0 +1,20 @@
+[user]
+	name = xxx
+	email = xxx
+[push]
+	default = simple
+[gui]
+[diff]
+	tool = p4merge
+[difftool "p4merge"]
+	path = C:/Program Files/Perforce/p4merge.exe
+[difftool]
+	prompt = false
+[merge]
+	tool = p4merge
+[mergetool "p4merge"]
+	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+[mergetool]
+	prompt = false
+	trustExitCode = false
+	keepBackup = false
