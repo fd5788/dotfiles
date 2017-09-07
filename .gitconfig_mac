@@ -1,0 +1,18 @@
+[push]
+	default = simple
+[user]
+	name = xxx
+	email = xxx
+[merge]
+	tool = extMerge
+[mergetool "extMerge"]
+	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	trustExitCode = false
+	prompt = false
+[diff]
+	external = extDiff
+[difftool]
+	prompt = false
+[color]
+	ui = auto
