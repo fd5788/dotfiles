@@ -5,6 +5,15 @@
 ""       http://github.com/fd5788/dotfiles/.vimrc/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""Platform
+function! Platform()
+  if has("win32")
+    return "windows"
+  else
+    return "linux"
+  endif
+endfunction
+
 "" Linux Distribution
 "function! LinuxDis()
 "    let linuxDistribution = system('cat /etc/issue | grep Debian')
@@ -52,7 +61,9 @@ Plugin 'fatih/vim-go'
 "Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'tpope/vim-dispatch'
 ""compelter engine
-Plugin 'Valloric/YouCompleteMe'
+if Platform() == "linux"
+	Plugin 'Valloric/YouCompleteMe'
+endif
 "Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
@@ -108,14 +119,6 @@ if has("syntax")
   syntax on
 endif
 
-" Platform
-function! Platform()
-  if has("win32")
-    return "windows"
-  else
-    return "linux"
-  endif
-endfunction
 
 "Sets how many lines of history VIM har to remember
 set history=600
@@ -161,12 +164,13 @@ if has("multi_byte")
     set fileencodings=utf-8
   endif
 endif
-"if Platform() == "windows"
-   "set encoding=utf-8
+if Platform() == "windows"
+   set encoding=utf-8
    "set langmenu=zh_CN.UTF-8
-   "language message zh_CN.UTF-8
-   "set fileencodings=ucs-bom,utf-8,gb18030,cp936,big5,euc-jp,euc-kr,latin1
-"endif
+   set langmenu=en_US.UTF-8
+   language message en_US.UTF-8
+   set fileencodings=ucs-bom,utf-8,gb18030,cp936,big5,euc-jp,euc-kr,latin1
+endif
 
 "Enable filetype plugin
 filetype plugin indent on
@@ -363,8 +367,7 @@ if has("gui_running")
 endif
 
 "" reference k-vim
-" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
-" 好处：误删什么的，如果以前屏幕打开，可以找回
+" content displayed on screen after exit vim for copy and history
 set t_ti= t_te=
 
 ""swith buffer (using ctrlspace plugin recommended)
@@ -1246,17 +1249,19 @@ endfunc
    let g:syntastic_enable_balloons = 1
 
    """"""""""""""""""""""""""""""
-   " youcomplete setting
+   " youcompleteme setting
    """"""""""""""""""""""""""""""
-   let g:ycm_global_ycm_extra_conf = ".vim/.ycm_extra_conf.py"
-   let g:ycm_key_list_select_completion=[]
-   let g:ycm_key_list_previous_completion=[]
-   let g:ycm_error_symbol = '>>'
-   let g:ycm_warning_symbol = '>*'
-   nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-   nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-   nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-   nmap <F4> :YcmDiags<CR>
+   if Platform() == "linux"
+	   let g:ycm_global_ycm_extra_conf = ".vim/.ycm_extra_conf.py"
+	   let g:ycm_key_list_select_completion=[]
+	   let g:ycm_key_list_previous_completion=[]
+	   let g:ycm_error_symbol = '>>'
+	   let g:ycm_warning_symbol = '>*'
+	   nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+	   nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+	   nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+	   nmap <F4> :YcmDiags<CR>
+   endif
 
 "   """"""""""""""""""""""""""""""
 "   " neocomplete setting
