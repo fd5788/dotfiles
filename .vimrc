@@ -160,20 +160,20 @@ if has("multi_byte")
   "  set termencoding=euc-jp
   "  set fileencoding=euc-jp
   endif
-  " Detect UTF-8 locale, and replace CJK setting if needed
-  if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-    set encoding=utf-8
-    set termencoding=utf-8
-    set fileencodings=utf-8,chinese,gb18030,cp936,big5
-    set fileencodings=utf-8
-  endif
 endif
-"if Platform() == "windows"
-   "set encoding=utf-8
-   "set langmenu=zh_CN.UTF-8
-   "language message zh_CN.UTF-8
-   "set fileencodings=ucs-bom,utf-8,gb18030,cp936,big5,euc-jp,euc-kr,latin1
-"endif
+" Detect UTF-8 locale, and replace CJK setting if needed
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8,chinese,gb18030,cp936,big5
+set fileencodings=utf-8
+endif
+""if Platform() == "windows"
+""   set encoding=utf-8
+""   set langmenu=zh_CN.UTF-8
+""   language message zh_CN.UTF-8
+""   set fileencodings=ucs-bom,utf-8,gb18030,cp936,big5,euc-jp,euc-kr,latin1
+""endif
 
 "Enable filetype plugin
 filetype plugin indent on

@@ -49,25 +49,25 @@ plugins=(git git-prompt autojump osx)
 source $ZSH/oh-my-zsh.sh
 
 ## User configuration
+# You may need to manually set your language environment
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-##android
-#android ndk
-export ANDROID_NDK_ROOT=/Users/fd5788/Library/Android/ndk
-export PATH=$PATH:$ANDROID_NDK_ROOT
-#android sdk
-export ANDROID_SDK_ROOT=/Users/fd5788/Library/Android/sdk
-export PATH=$PATH:$ANDROID_SDK_ROOT:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools
-#old version for unity3
-#export ANDROID_HOME=/Users/fd5788/Develop/android/sdk
-#export PATH=$PATH:$ANDROID_HOME/platform-tools
+## ANDROID
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+export PATH=$ANDROID_SDK_ROOT:$PATH
+export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
+
+export NDK_ROOT="$HOME/Library/Android/ndk"
+export PATH=$NDK_ROOT:$PATH
 
 ##golang pkg version
 #export GOROOT=/usr/local/go
 #homebrew version
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/workspace/go
-##rust
-export RUSTPATH=/Users/fd5788/.cargo
+#rust
+export RUSTPATH=$HOME/.cargo
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$RUSTPATH/bin
 
 ## macports
@@ -78,19 +78,13 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$RUSTPATH/bin
 #zsh-completions
 fpath=($ANDROID_SDK_ROOT/tools /usr/local/share/zsh-completions $fpath)
 
-#export PATH=/usr/local/bin:$PATH
-#export MANPATH=/usr/local/man:$MANPATH
+export PATH=/usr/local/bin:$PATH
+export MANPATH=/usr/local/man:$MANPATH
 
 # homebrew for github
 if [ -f /usr/local/bin/brew ]; then
     export HOMEBREW_GITHUB_API_TOKEN=a56e8d1b60e816cbd9ed697d8dd1ad4121049460
 fi
-
-# You may need to manually set your language environment
-#export LC_ALL=en_US.UTF-8
-#export LANG=en_US.UTF-8
-### for cocos package
-export LC_CTYPE=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -139,32 +133,31 @@ alias l='ls -CF'
 #export http_proxy=http://127.0.0.1:8118
 #export https_proxy=http://127.0.0.1:8118
 
-# Add environment variable COCOS_CONSOLE_ROOT for ocos2d-x
-export COCOS_CONSOLE_ROOT=/Users/fd5788/Library/cocos2d-x/cocos2d-x-3.14.1/tools/cocos2d-console/bin
+##cocos-x
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT="$HOME/Library/cocos2d-x/cocos2d-x-3.16/tools/cocos2d-console/bin"
 export PATH=$COCOS_CONSOLE_ROOT:$PATH
 
 # Add environment variable COCOS_X_ROOT for cocos2d-x
-export COCOS_X_ROOT=/Users/fd5788/Library/cocos2d-x
+export COCOS_X_ROOT="$HOME/Library/cocos2d-x"
 export PATH=$COCOS_X_ROOT:$PATH
 
 # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-export COCOS_TEMPLATES_ROOT=/Users/fd5788/Library/cocos2d-x/cocos2d-x-3.14.1/templates
+export COCOS_TEMPLATES_ROOT="$HOME/Library/cocos2d-x/cocos2d-x-3.16/templates"
 export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
-# Add environment variable NDK_ROOT for cocos2d-x
-export NDK_ROOT=/Users/fd5788/Library/Android/ndk
-export PATH=$NDK_ROOT:$PATH
-
 # Add environment variable ANT_ROOT for cocos2d-x
-export ANT_ROOT=/usr/local/Cellar/ant/1.10.1/bin
+export ANT_ROOT="/usr/local/Cellar/ant/1.10.1/bin"
 export PATH=$ANT_ROOT:$PATH
 
+##QUICK_V3
 # add by quick-cocos2d-x setup, DATE: 2017-04-19 TIME: 01:42:51
 export QUICK_V3_ROOT=`cat ~/.QUICK_V3_ROOT`
 export PATH=$PATH:$QUICK_V3_ROOT/quick/bin
 
 #qt5
 export PATH=/usr/local/opt/qt5/bin:$PATH
+
 #latex
 #export PATH=$PATH:/usr/local/texlive/2016/bin
 
