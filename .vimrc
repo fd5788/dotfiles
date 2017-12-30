@@ -2,7 +2,7 @@
 "" This vimrc is based on the vimrc by Easwy Yang:
 ""       http://easwy.com/
 "" You can find the latest version on:
-""       http://github.com/fd5788/dotfiles/.vimrc/
+""       https://github.com/fd5788/dotfiles/.vimrc/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "" Linux Distribution
@@ -33,13 +33,13 @@ let g:vundle_default_git_proto = 'git'
 Plugin 'gmarik/Vundle.vim',{'name': 'vundle'}
 Plugin 'kien/ctrlp.vim',{'name': 'ctrlp'}
 Plugin 'tacahiroy/ctrlp-funky'
-""Plugin 'szw/vim-ctrlspace'
+"Plugin 'szw/vim-ctrlspace'
 Plugin 'mileszs/ack.vim',{'name': 'ack'}
 Plugin 'fholgado/minibufexpl.vim',{'name': 'minibufexpl'}
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides'
-""Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
@@ -54,13 +54,13 @@ Plugin 'Blackrush/vim-gocode'
 ""lua completer
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-lua-ftplugin'
-""Plugin 'u0u0/vim-quick-community'
+"Plugin 'u0u0/vim-quick-community'
 ""csharp completer
-""Plugin 'OmniSharp/omnisharp-server'
-""Plugin 'OmniSharp/omnisharp-vim'
+"Plugin 'OmniSharp/omnisharp-server'
+"Plugin 'OmniSharp/omnisharp-vim'
 """"compelter engine
 Plugin 'Valloric/YouCompleteMe'
-""Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
+"Plugin 'Shougo/neocomplete.vim',{'name': 'neocomplete'}
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -82,7 +82,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 "Plugin 'powerline/powerline'
-Plugin 'powerline/fonts'
+"Plugin 'powerline/fonts'
 "Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'lilydjwg/fcitx.vim',{'name': 'fcitx'}
 Plugin 'rizzatti/dash.vim',{'name': 'dash'}
@@ -90,14 +90,14 @@ Plugin 'rizzatti/dash.vim',{'name': 'dash'}
 ""colorscheme
 Plugin 'tomasr/molokai'
 "Plugin 'flazz/vim-colorschemes'
-""Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 
 ""vim-scripts repo
 "Plugin 'Align'
 "Plugin 'AutoAlign'
-"Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
 Plugin 'AutoClose'
-Plugin 'vim-scripts/TaskList.vim', {'name': 'TaskList'}
+"Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
+Plugin 'vim-scripts/TaskList.vim', {'name': 'taskList'}
 "Plugin 'Sessionman'
 
 " All of your Plugins must be added before the following line
@@ -257,48 +257,19 @@ elseif Platform() == 'windows'
     autocmd! bufwritepost _vimrc source ~/_vimrc
 endif
 
-" For windows version
-"if Platform() == 'windows'
-"    source $VIMRUNTIME/mswin.vim
-"    behave mswin
-"
-"    set diffexpr=MyDiff()
-"    function! MyDiff()
-"        let opt = '-a --binary '
-"        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-"        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-"        let arg1 = v:fname_in
-"        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-"        let arg2 = v:fname_new
-"        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-"        let arg3 = v:fname_out
-"        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-"        let eq = ''
-"        if $VIMRUNTIME =~ ' '
-"            if &sh =~ '\<cmd'
-"                let cmd = '""' . $VIMRUNTIME . '\diff"'
-"                let eq = '"'
-"            else
-"                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-"            endif
-"        else
-"            let cmd = $VIMRUNTIME . '\diff'
-"        endif
-"        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-"    endfunction
-"endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Set font
 if Platform() == "linux"
   if has("gui_gtk2")
-    set gfn=Courier\ New\ 12,Courier\ 12,Luxi\ Mono\ 12,
-          \DejaVu\ Sans\ Mono\ 12,Bitstream\ Vera\ Sans\ Mono\ 12,
-          \SimSun\ 12,WenQuanYi\ Micro\ Hei\ Mono\ 12
+    set gfn=Courier\ New\ 13,Courier\ 13,Luxi\ Mono\ 13,
+          \DejaVu\ Sans\ Mono\ 13,Bitstream\ Vera\ Sans\ Mono\ 13,
+          \SimSun\ 13,WenQuanYi\ Micro\ Hei\ Mono\ 13
+  elseif has("mac")
+    set gfn=Meslo\ LG\ M\ Regular\ for\ Powerline:h13,PowerlineSymbols:h13
   elseif has("xg")
-    set gfn=*-*-medium-r-normal--12-*-*-*-*-m-*-*
+    set gfn=*-*-medium-r-normal--13-*-*-*-*-m-*-*
   endif
 endif
 
