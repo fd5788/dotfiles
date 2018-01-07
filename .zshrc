@@ -78,7 +78,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$RUSTPATH/bin
 #zsh-completions
 fpath=($ANDROID_SDK_ROOT/tools /usr/local/share/zsh-completions $fpath)
 
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 
 # homebrew for github
@@ -129,9 +129,8 @@ alias l='ls -CF'
 ##}}}
 
 #vpn setting
-#export http_proxy=socks5://localhost:8118
-#export http_proxy=http://127.0.0.1:8118
-#export https_proxy=http://127.0.0.1:8118
+alias proxyon='export http_proxy=http://localhost:8118; export https_proxy=$http_proxy'
+alias proxyoff='unset http_proxy; unset https_proxy'
 
 ##cocos-x
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
