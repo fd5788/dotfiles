@@ -7,6 +7,9 @@ color tree.date		black	cyan	bold
 # view
 set main-view = id date:relative-compact author:email-user,maxwidth=16 commit-title:yes,graph,refs
 set refs-view = id date:relative author:email-user ref commit-title
+set blame-view-date-local = yes
+set stash-view-date-local = yes
+set tree-view-date-local = yes
 
 # Vim-style keybindings for Tig
 #bind generic <C-f> move-page-down
@@ -17,6 +20,7 @@ source ~/.tig/vim.tigrc
 bind generic c  none
 bind main csf !git svn fetch
 bind main csr !git svn rebase
+bind main csp ?git svn dcommit
 bind main csu !sh -c "git stash && git svn rebase && git stash pop"
 bind main csc !sh -c "git clean -fd && git svn mkdirs"
 bind main csv !sh -c "git log -1|grep 'trunk@'|sed 's/.*trunk@\([0-9]*\).*/\1/'"
