@@ -132,6 +132,19 @@ alias l='ls -CF'
 alias proxyon='export http_proxy=http://localhost:8118; export https_proxy=$http_proxy'
 alias proxyoff='unset http_proxy; unset https_proxy'
 
+# git-svn
+alias gs='git status'
+alias gss='git status'
+alias gsl='git stash list'
+alias gsf='git svn fetch'
+alias gsrebase='git svn rebase'
+alias gspush='git svn dcommit'
+alias gsupdate='git stash && git svn rebase && git stash pop'
+alias gsclean='git clean -fd && git svn mkdirs'
+alias gsversion="git log -1|grep 'trunk@'|sed 's/.*trunk@\([0-9]*\).*/\1/'"
+alias gslsempdir="git status|grep 'deleted'|sed 's/.*deleted:[[:space:]]*\(.*\)/\1/'"
+alias gsmkempdir="git status|grep 'deleted'|sed 's/.*deleted:[[:space:]]*\(.*\)/\1/'|sed 's/.meta$//'|xargs mkdir"
+
 ##cocos-x
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT="$HOME/Library/cocos2d-x/cocos2d-x-3.16/tools/cocos2d-console/bin"
