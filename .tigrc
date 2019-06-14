@@ -1,0 +1,23 @@
+# Override the default terminal colors to white on black.
+color default		white	black
+color date          yellow	default
+# View-specific color
+color tree.date		black	cyan	bold
+
+# view
+#set main-view-date = relative-compact
+set main-view = id date:relative-compact author:full,maxwidth=32 commit-title:yes,graph,refs
+set refs-view = id date:relative author ref commit-title
+
+# Vim-style keybindings for Tig
+#bind generic <C-f> move-page-down
+#bind generic <C-b> move-page-up
+source ~/.tig/vim.tigrc
+
+# git-svn
+bind generic c  none
+bind main csf !git svn fetch
+bind main csr !git svn rebase
+bind main csu !sh -c "git stash && git svn rebase && git stash pop"
+bind main csc !sh -c "git clean -fd && git svn mkdirs"
+bind main csv !sh -c "git log -1|grep 'trunk@'|sed 's/.*trunk@\([0-9]*\).*/\1/'"
