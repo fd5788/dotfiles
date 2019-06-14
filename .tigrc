@@ -5,9 +5,8 @@ color date          yellow	default
 color tree.date		black	cyan	bold
 
 # view
-#set main-view-date = relative-compact
-set main-view = id date:relative-compact author:full,maxwidth=32 commit-title:yes,graph,refs
-set refs-view = id date:relative author ref commit-title
+set main-view = id date:relative-compact author:email-user,maxwidth=16 commit-title:yes,graph,refs
+set refs-view = id date:relative author:email-user ref commit-title
 
 # Vim-style keybindings for Tig
 #bind generic <C-f> move-page-down
