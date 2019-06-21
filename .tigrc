@@ -18,8 +18,10 @@ source ~/.tig/vim.tigrc
 
 # git-svn
 bind generic c  none
+bind main css ?git stash
+bind main csk ?git stash -k
 bind main csf !git svn fetch
-bind main csr !git svn rebase
+bind main csr ?git svn rebase
 bind main csp ?git svn dcommit
 bind main csu !sh -c "git stash && git svn rebase && git stash pop"
 bind main cscl !sh -c "git clean -fd && git svn mkdirs"
